@@ -1,5 +1,7 @@
 # Kirby 3 Srcset
 
+![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-srcset.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg)
+
 Kirby 3 Plugin for creating image srcset using picture element
 
 ## Notice
@@ -14,6 +16,22 @@ Kirby 3 Plugin for creating image srcset using picture element
     echo $page->image('ukulele.jpg')->srcset();
     echo $page->image('ukulele.jpg')->srcset('default');
     echo $page->image('ukulele.jpg')->srcset('breakpoints');
+```
+
+**non-lazy**
+```html
+<picture class="srcset" data-preset="default">
+    <source srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w" type="image/jpeg" />
+    <noscript><img src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" /></noscript>
+</picture>
+```
+
+**lazy**
+```html
+<picture class="srcset lazy" data-preset="default">
+    <source data-srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w" type="image/jpeg" />
+    <noscript><img src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" /></noscript>
+</picture>
 ```
 
 ## Performance
