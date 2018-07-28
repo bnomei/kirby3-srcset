@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a85a3168a59142eeed8455b8f1706481",
-    "content-hash": "854dce86a6f2c71dc831ee8a88d7eca1",
+    "hash": "ca8d1f5be9ee6ea713bb12cb535e851e",
+    "content-hash": "27ff0a2f1c17bf47b4d84c9234c1872e",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -268,16 +268,16 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "3.0.0-beta-3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/k-next/kirby.git",
-                "reference": "c55475cea1e5e2c8cb7c52f33e46a11ab95437db"
+                "reference": "33c2b1334e72d408caf20b8b659544d533214f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/k-next/kirby/zipball/c55475cea1e5e2c8cb7c52f33e46a11ab95437db",
-                "reference": "c55475cea1e5e2c8cb7c52f33e46a11ab95437db",
+                "url": "https://api.github.com/repos/k-next/kirby/zipball/33c2b1334e72d408caf20b8b659544d533214f9f",
+                "reference": "33c2b1334e72d408caf20b8b659544d533214f9f",
                 "shasum": ""
             },
             "archive": {
@@ -374,7 +374,7 @@
                 "forum": "https://forum.getkirby.com",
                 "source": "https://github.com/getkirby/kirby"
             },
-            "time": "2018-07-20 11:51:17"
+            "time": "2018-07-26 15:25:52"
         },
         {
             "name": "league/color-extractor",
@@ -795,10 +795,17 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "3.0.0",
+            "alias_normalized": "3.0.0.0",
+            "version": "9999999-dev",
+            "package": "getkirby/cms"
+        }
+    ],
     "minimum-stability": "beta",
     "stability-flags": {
-        "getkirby/cms": 10
+        "getkirby/cms": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

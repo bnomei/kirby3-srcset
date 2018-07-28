@@ -1,7 +1,7 @@
 {
     "name": "bnomei/kirby3-srcset",
     "type": "plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "MIT",
     "description": "Kirby 3 Plugin for creating image srcset using picture element",
     "autoload": {
@@ -25,7 +25,7 @@
         }
       ],
     "require": {
-        "getkirby/cms": "^3.0@beta"
+        "getkirby/cms": "dev-master as 3.0.0"
     },
       "minimum-stability": "beta"
 }
