@@ -25,7 +25,7 @@
         }
       ],
     "require": {
-        "getkirby/cms": "3.0.*"
-      },
+        "getkirby/cms": "^3.0@beta"
+    },
       "minimum-stability": "beta"
 }
