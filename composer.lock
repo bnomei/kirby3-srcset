@@ -1,11 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "ca8d1f5be9ee6ea713bb12cb535e851e",
-    "content-hash": "27ff0a2f1c17bf47b4d84c9234c1872e",
+    "content-hash": "5332fa7a35925c1914d356a2b159ca49",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -44,7 +43,7 @@
                 }
             ],
             "description": "A PHP class that makes working with images as simple as possible.",
-            "time": "2017-09-12 09:03:56"
+            "time": "2017-09-12T09:03:56+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -107,7 +106,7 @@
                 "security",
                 "symmetric key cryptography"
             ],
-            "time": "2018-07-24 23:27:56"
+            "time": "2018-07-24T23:27:56+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -153,7 +152,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2018-06-11 18:15:32"
+            "time": "2018-06-11T18:15:32+00:00"
         },
         {
             "name": "erusev/parsedown-extra",
@@ -203,7 +202,7 @@
                 "parsedown",
                 "parser"
             ],
-            "time": "2018-05-08 21:54:32"
+            "time": "2018-05-08T21:54:32+00:00"
         },
         {
             "name": "filp/whoops",
@@ -264,7 +263,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2018-03-03 17:56:25"
+            "time": "2018-03-03T17:56:25+00:00"
         },
         {
             "name": "getkirby/cms",
@@ -272,12 +271,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/k-next/kirby.git",
-                "reference": "33c2b1334e72d408caf20b8b659544d533214f9f"
+                "reference": "e4c9f4d2dab9d145544aca59903199f146c3211b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/k-next/kirby/zipball/33c2b1334e72d408caf20b8b659544d533214f9f",
-                "reference": "33c2b1334e72d408caf20b8b659544d533214f9f",
+                "url": "https://api.github.com/repos/k-next/kirby/zipball/e4c9f4d2dab9d145544aca59903199f146c3211b",
+                "reference": "e4c9f4d2dab9d145544aca59903199f146c3211b",
                 "shasum": ""
             },
             "archive": {
@@ -374,7 +373,7 @@
                 "forum": "https://forum.getkirby.com",
                 "source": "https://github.com/getkirby/kirby"
             },
-            "time": "2018-07-26 15:25:52"
+            "time": "2018-07-31T15:39:35+00:00"
         },
         {
             "name": "league/color-extractor",
@@ -428,7 +427,7 @@
                 "image",
                 "palette"
             ],
-            "time": "2016-12-15 09:30:02"
+            "time": "2016-12-15T09:30:02+00:00"
         },
         {
             "name": "michelf/php-smartypants",
@@ -478,7 +477,7 @@
                 "typographer",
                 "typography"
             ],
-            "time": "2016-12-13 01:01:17"
+            "time": "2016-12-13T01:01:17+00:00"
         },
         {
             "name": "mustangostang/spyc",
@@ -528,7 +527,7 @@
                 "yaml",
                 "yml"
             ],
-            "time": "2017-02-24 16:06:33"
+            "time": "2017-02-24T16:06:33+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -573,7 +572,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-07-02 15:55:56"
+            "time": "2018-07-02T15:55:56+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -639,7 +638,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-03-27 13:49:45"
+            "time": "2018-03-27T13:49:45+00:00"
         },
         {
             "name": "psr/log",
@@ -686,7 +685,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -745,7 +744,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2018-04-26 10:06:28"
+            "time": "2018-04-26T10:06:28+00:00"
         },
         {
             "name": "true/punycode",
@@ -791,7 +790,7 @@
                 "idna",
                 "punycode"
             ],
-            "time": "2016-11-16 10:37:54"
+            "time": "2016-11-16T10:37:54+00:00"
         }
     ],
     "packages-dev": [],
