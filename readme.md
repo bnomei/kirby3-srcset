@@ -41,13 +41,6 @@ This plugin is free but if you use it in a commercial project please consider to
 </picture>
 ```
 
-## Performance
-
-All srcset images are created as regular thumbs but at the time the php script requests them. There is no jobs logik like the awesome imagekit has.
-Also if you have an optimzer plugin like my [imageoptim thumbs](https://github.com/bnomei/kirby3-thumb-imageoptim) installed the optimization will done one after another. this can take a while and even cause an timeout multiple times.
-
-Solution? Use fewer widths in presets, add images one by one and wait for imagekit.
-
 ## Options explained
 ```php
 'lazy' => false, // bool or class-name, for lozad or lazysizes etc.
