@@ -19,6 +19,10 @@ This plugin is free but if you use it in a commercial project please consider to
     echo $page->image('ukulele.jpg')->srcset();
     echo $page->image('ukulele.jpg')->srcset('default');
     echo $page->image('ukulele.jpg')->srcset('breakpoints');
+
+    // choosing if lazy is possible global or override on call
+    // default: null => config value, true => will be flagged for lazyloading
+    echo $page->image('ukulele.jpg')->srcset('breakpoints', true); // null, true, false, 'classname'
 ```
 
 **non-lazy**
