@@ -9,7 +9,7 @@ class Srcset
         $isLazy = $lazy !== null && $lazy !== false;
         return snippet('plugin-srcset', [
             'file' => $file,
-            'lazy' => (is_string($lazy) ? $lazy : ($lazy?'lazy':'')),
+            'lazy' => (is_string($lazy) ? $lazy : ($lazy?'lazyload':'')),
             'isLazy' => $isLazy,
             'preset' => $preset,
             'img' => \Bnomei\Srcset::img($file, $preset, $lazy),
