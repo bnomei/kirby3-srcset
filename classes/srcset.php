@@ -57,6 +57,8 @@ class Srcset
         $presets = option('bnomei.srcset.presets');
         if (is_array($preset)) {
             $presetWidths = $preset;
+        } else {
+            $presetWidths = \Kirby\Toolkit\A::get($presets, $preset, []);
         }
         $presetWidths[] = intval($file->width());
         sort($presetWidths, SORT_NUMERIC);
