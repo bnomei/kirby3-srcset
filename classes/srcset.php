@@ -36,7 +36,7 @@ class Srcset
         }
     }
 
-    public static function img(Kirby\Cms\File $file, $preset = 'default', $lazy = false)
+    public static function img(\Kirby\Cms\File $file, $preset = 'default', $lazy = false)
     {
         if (!$file && !is_a($file, 'Kirby\Cms\File')) {
             return null;
@@ -48,7 +48,7 @@ class Srcset
         ];
     }
 
-    public static function sources(Kirby\Cms\File $file, $preset = 'default', $lazy = false)
+    public static function sources(\Kirby\Cms\File $file, $preset = 'default', $lazy = false)
     {
         if (!$file && !is_a($file, 'Kirby\Cms\File')) {
             return null;
