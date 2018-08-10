@@ -20,5 +20,16 @@ Kirby::plugin('bnomei/srcset', [
         'srcset' => function ($preset = 'default', $lazy = null) {
             return \Bnomei\Srcset::srcset($this, $preset, $lazy);
         }
+    ],
+    'tags' => [
+        'srcset' => [
+            'attr' => ['preset', 'lazy'],
+            'html' => function ($tag) {
+                if ($file = $tag->page()->image($tag->value)) {
+                    return \Bnomei\Srcset::srcset($file, $tag->preset, boolval($tag->lazy));
+                }
+                return '';
+            }
+        ]
     ]
 ]);

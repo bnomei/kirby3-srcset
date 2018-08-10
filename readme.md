@@ -31,18 +31,34 @@ This plugin is free but if you use it in a commercial project please consider to
 **non-lazy**
 ```html
 <picture class="srcset" data-preset="default">
-    <source srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w" type="image/jpeg" />
-    <img src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" />
+    <source srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w" type="image/jpeg" />
+    <img src="http://../media/pages/home/test-960x480-q90.jpg" alt="test.jpg or img.alt.fieldname" />
 </picture>
 ```
 
 **lazy**
 ```html
 <picture class="srcset" data-preset="default">
-    <source data-srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w" type="image/jpeg" />
-    <img class="lazyload" src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" />
+    <source data-srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w" type="image/jpeg" />
+    <img class="lazyload" data-src="http://../media/pages/home/test-960x480-q900.jpg" alt="test.jpg or img.alt.fieldname" />
 </picture>
 ```
+
+## Usage Kirby Tag
+
+```
+(image: myfile.jpg)
+
+(srcset: myfile.jpg)
+(srcset: myfile.jpg preset: breakpoints)
+(srcset: myfile.jpg lazy: true)
+(srcset: myfile.jpg preset: breakpoints lazy: true)
+```
+
+
+## FAQ
+
+- [Override default image tag](https://github.com/bnomei/kirby3-srcset/issues/2)
 
 ## Options explained
 ```php
