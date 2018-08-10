@@ -4,7 +4,12 @@ namespace Bnomei;
 
 class Srcset
 {
-    public static function srcset($file, $preset = 'default', $lazy = null) {
+    public static function srcset(\Kirby\Cms\File $file, $preset = 'default', $lazy = null)
+    {
+        if (!$file || !is_a($file, 'Kirby\Cms\File')) {
+            return null;
+        }
+
         $lazy = !is_null($lazy) ? $lazy : option('bnomei.srcset.lazy', false);
         $isLazy = $lazy !== null && $lazy !== false;
         return snippet('plugin-srcset', [
@@ -17,46 +22,57 @@ class Srcset
         ], true);
     }
 
-    public static function resizeWithType($file, $width, $type) {
-        if(!$file || !is_a($file, 'Kirby\Cms\File')) return null;
+    public static function resizeWithType(\Kirby\Cms\File $file, int $width, string $type)
+    {
+        if (!$file || !is_a($file, 'Kirby\Cms\File')) {
+            return null;
+        }
 
         $resize = option('bnomei.srcset.resize', null);
-        if($resize && is_callable($resize)) {
+        if ($resize && is_callable($resize)) {
             return $resize($file, $width, $type);
         } else {
             return $file->resize($width);
         }
     }
 
-    public static function img($file, $preset = 'default', $lazy = false)
+    public static function img(Kirby\Cms\File $file, $preset = 'default', $lazy = false)
     {
-        if (!$file && !is_a($file, 'Kirby\Cms\File')) return null;
+        if (!$file && !is_a($file, 'Kirby\Cms\File')) {
+            return null;
+        }
+        $captionFieldname = option('bnomei.srcset.img.alt.fieldname', 'caption');
         return [
             'src' => $file->resize()->url(), // trigger thumb if needed
-            'alt' => $file->caption()->isNotEmpty() ? $file->caption()->value() : $file->filename(),
+            'alt' => $file->$captionFieldname()->isNotEmpty() ? $file->$captionFieldname()->value() : $file->filename(),
         ];
     }
 
-    public static function sources($file, $preset = 'default', $lazy = false) {
-        if (!$file && !is_a($file, 'Kirby\Cms\File')) return null;
+    public static function sources(Kirby\Cms\File $file, $preset = 'default', $lazy = false)
+    {
+        if (!$file && !is_a($file, 'Kirby\Cms\File')) {
+            return null;
+        }
 
         $presets = option('bnomei.srcset.presets');
-        $presetWidths = \Kirby\Toolkit\A::get($presets, $preset, []);
+        if (is_array($preset)) {
+            $presetWidths = $preset;
+        }
         $presetWidths[] = intval($file->width());
         sort($presetWidths, SORT_NUMERIC);
         $presetWidths = array_unique($presetWidths);
 
         $types = option('bnomei.srcset.types', []);
-        if (count($types) == 0) {
+        if (count($types) == 0 || option('bnomei.srcset.types.addsource', false)) {
             $types[] = $file->mime();
         }
 
         $sources = [];
-        foreach($types as $t) {
+        foreach ($types as $t) {
             $srcset = [];
-            foreach($presetWidths as $p) {
+            foreach ($presetWidths as $p) {
                 $img = static::resizeWithType($file, intval($p), strval($t));
-                if($img && is_a($img, 'Kirby\CMS\File')) {
+                if ($img && is_a($img, 'Kirby\CMS\File')) {
                     $srcset[] = $img->url() . ' ' . $p . 'w';
                 }
             }

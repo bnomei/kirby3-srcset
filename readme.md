@@ -8,10 +8,12 @@ This plugin is free but if you use it in a commercial project please consider to
 
 ## Notice
 
+- Why the picture element? Because having multiple `sources` with different mime types can improve pagespeed. For example: This is the only way to use `webp` and have a fallack to `jpg` for browsers that [do not support it](https://caniuse.com/#feat=webp).
 - You will need a Picture Polyfill for [IE11 support](https://caniuse.com/#search=picture). This plugin does not provide this.
 - This plugin is only a quick hack until @fabianmichael ports his [awesome imageset plugin](https://github.com/fabianmichael/kirby-imageset) for Kirby 3
 - Javascript library for lazy loading is not included since that should be part of the websites build chain.
-- A `sizes` attribute is not defined since js lib `lazysizes` will create these on-the-fly.
+- A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) will create these on-the-fly based on actual screen size of image.
+
 
 ## Usage
 
@@ -19,6 +21,7 @@ This plugin is free but if you use it in a commercial project please consider to
     echo $page->image('ukulele.jpg')->srcset();
     echo $page->image('ukulele.jpg')->srcset('default');
     echo $page->image('ukulele.jpg')->srcset('breakpoints');
+    echo $page->image('ukulele.jpg')->srcset([320, 640, 960]);
 
     // choosing if lazy is possible global or override on call
     // default: null => config value, true => will be flagged for lazyloading
@@ -29,37 +32,47 @@ This plugin is free but if you use it in a commercial project please consider to
 ```html
 <picture class="srcset" data-preset="default">
     <source srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w" type="image/jpeg" />
-    <noscript><img src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" /></noscript>
+    <img src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" />
 </picture>
 ```
 
 **lazy**
 ```html
-<picture class="srcset lazy" data-preset="default">
+<picture class="srcset" data-preset="default">
     <source data-srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w" type="image/jpeg" />
-    <noscript><img src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" /></noscript>
+    <img class="lazyload" src="http://../media/pages/home/test-640x320-q90.jpg" alt="test.jpg" />
 </picture>
 ```
 
 ## Options explained
 ```php
-'lazy' => false, // bool or class-name, for lozad or lazysizes etc.
+'lazy' => false, // bool or class-name, for lozad or lazysizes etc. true => 'lazyload'
 // override preset array to create your own list of widths
 'presets' => [
     'default' => [320], // will generate original and 320px width thumb
     'breakpoints' => [576, 768, 992, 1200], // common breakpoints
 ],
-// be default only a source of same type a original will be added
+// https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php
+// by default only a source of same type a original will be added
 // but setting mime types here you could add more but...
 'types' => [],
 // ... you have to create the variants yourself. there might be
 // another plugin that can do that one day.
 // then you can call it here and use the mime type/
-'resize' => function ($file, $width, $type) {
-    // NOTE: override and do something with $type
+'resize' => function (\Kirby\Cms\File $file, int $width, string $type) {
+    // NOTE: override and do something with $type (mime type string)
+    // return $file->yourImageConverter($width, $type);
     return $file->resize($width);
 }
 ```
+
+## Other Settings
+
+**img.alt.fieldname**
+- default: `caption` will call $file->caption()` if exists or use `$file->filename()`
+
+**types.addsource**
+- default: `false` will not automatically add mime-type of source to registered types. But if no type is set (empty array) the mime type of source is added.
 
 
 ## Disclaimer
