@@ -16,7 +16,7 @@ class Srcset
             'file' => $file,
             'lazy' => (is_string($lazy) ? $lazy : ($lazy?'lazyload':'')),
             'isLazy' => $isLazy,
-            'preset' => $preset,
+            'preset' => is_array($preset) ? implode(', ', $preset) : $preset,
             'img' => \Bnomei\Srcset::img($file, $preset, $lazy),
             'sources' => \Bnomei\Srcset::sources($file, $preset, $lazy)
         ], true);
@@ -55,11 +55,7 @@ class Srcset
         }
 
         $presets = option('bnomei.srcset.presets');
-        if (is_array($preset)) {
-            $presetWidths = $preset;
-        } else {
-            $presetWidths = \Kirby\Toolkit\A::get($presets, $preset, []);
-        }
+        $presetWidths = is_array($preset) ? $preset : \Kirby\Toolkit\A::get($presets, $preset, []);
         $presetWidths[] = intval($file->width());
         sort($presetWidths, SORT_NUMERIC);
         $presetWidths = array_unique($presetWidths);

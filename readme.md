@@ -47,12 +47,24 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Usage Kirby Tag
 
 ```
+# like image tag
 (image: myfile.jpg)
 
+# supports preset as string and lazy options
 (srcset: myfile.jpg)
-(srcset: myfile.jpg preset: breakpoints)
 (srcset: myfile.jpg lazy: true)
+(srcset: myfile.jpg preset: default)
 (srcset: myfile.jpg preset: breakpoints lazy: true)
+
+# preset option takes various formats
+# string, number(s), with and without px, comma and brackets
+(srcset: myfile.jpg preset: breakpoints)
+(srcset: myfile.jpg preset: 320 640 960)
+(srcset: myfile.jpg preset: [320, 640, 960])
+(srcset: myfile.jpg preset: 320px, 640px, 960px)
+
+# but NOT ranges (like imageset does)
+(srcset: myfile.jpg preset: 320-960, 3) // fails!
 ```
 
 

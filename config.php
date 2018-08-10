@@ -25,10 +25,22 @@ Kirby::plugin('bnomei/srcset', [
         'srcset' => [
             'attr' => ['preset', 'lazy'],
             'html' => function ($tag) {
-                if ($file = $tag->page()->image($tag->value)) {
-                    return \Bnomei\Srcset::srcset($file, $tag->preset, boolval($tag->lazy));
+                try {
+                    $file = Kirby::instance()->file($tag->value, $tag->parent());
+                    $preset = (string) $tag->preset;
+                    if(\Kirby\Toolkit\Str::contains($preset, ' ') || \Kirby\Toolkit\Str::contains($preset, ',')) {
+                        $preset = str_replace(['[',']',',','  ','px'], ['','',' ',' ',''], $preset);
+                        $preset = array_map(function ($v) {
+                                return trim($v);
+                            }, explode(' ', $preset));
+                    }
+                    if ($file) {
+                       return \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy)); 
+                    }
+                    return '';
+                } catch(Exception $ex) {
+                    return $ex->getMessage();
                 }
-                return '';
             }
         ]
     ]
