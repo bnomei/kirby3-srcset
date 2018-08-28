@@ -1,7 +1,7 @@
 {
     "name": "bnomei/kirby3-srcset",
     "type": "plugin",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "license": "MIT",
     "description": "Kirby 3 Plugin for creating image srcset using picture element",
     "autoload": {
@@ -29,8 +29,7 @@
     },
     "scripts": {
         "build": "composer update; composer dumpautoload -o;",
-        "dev-zip": "rm kirby3-srcset.zip; composer remove getkirby/cms; composer dumpautoload -o; composer archive --format=zip --file=kirby3-srcset; composer require getkirby/cms:'dev-master as 3.0.0'; composer dumpautoload -o;",
-        "zip": "rm kirby3-srcset.zip; composer update; composer remove getkirby/cms; composer dumpautoload -o; zip -r kirby3-srcset.zip . -x *.git*; composer require getkirby/cms:'dev-master as 3.0.0'; composer dumpautoload -o;"
+        "zip": "rm kirby3-srcset.zip; composer remove getkirby/cms; composer dumpautoload -o; composer archive --format=zip --file=kirby3-srcset; composer require getkirby/cms:'dev-master as 3.0.0'; composer dumpautoload -o;"
     },
     "minimum-stability": "beta"
 }

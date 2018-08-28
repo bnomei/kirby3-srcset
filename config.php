@@ -23,7 +23,7 @@ Kirby::plugin('bnomei/srcset', [
     ],
     'tags' => [
         'srcset' => [
-            'attr' => ['preset', 'lazy'],
+            'attr' => ['preset', 'lazy', 'link', 'class'],
             'html' => function ($tag) {
                 try {
                     $file = Kirby::instance()->file($tag->value, $tag->parent());
@@ -35,7 +35,14 @@ Kirby::plugin('bnomei/srcset', [
                             }, explode(' ', $preset));
                     }
                     if ($file) {
-                       return \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy)); 
+                        $srcset = \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy)).PHP_EOL;
+                        if($tag->link && $tag->class) {
+                            return '<a href="'.url($tag->link).'" class="'.$tag->class.'">'.$srcset.'</a>';
+                        } else if($tag->link) {
+                            return '<a href="'.url($tag->link).'">'.$srcset.'</a>';
+                        } else {
+                            return $srcset;
+                        }
                     }
                     return '';
                 } catch(Exception $ex) {
