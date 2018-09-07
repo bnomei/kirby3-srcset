@@ -4,7 +4,7 @@
 
 Kirby 3 Plugin for creating image srcset using picture element
 
-This plugin is free but if you use it in a commercial project please consider to [make a donation 🍻](https://www.paypal.me/bnomei/5).
+This plugin is free but if you use it in a commercial project please consider to [make a donation 🍻](https://www.paypal.me/bnomei/3).
 
 ## Notice
 
