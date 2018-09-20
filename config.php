@@ -35,13 +35,13 @@ Kirby::plugin('bnomei/srcset', [
                             }, explode(' ', $preset));
                     }
                     if ($file) {
-                        $srcset = \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy)).PHP_EOL;
+                        $srcset = \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy));
                         if($tag->link && $tag->class) {
                             return '<a href="'.url($tag->link).'" class="'.$tag->class.'">'.$srcset.'</a>';
                         } else if($tag->link) {
                             return '<a href="'.url($tag->link).'">'.$srcset.'</a>';
                         } else {
-                            return $srcset;
+                            return $srcset.PHP_EOL;
                         }
                     }
                     return '';
