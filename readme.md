@@ -2,7 +2,7 @@
 
 ![GitHub release](https://img.shields.io/github/release/bnomei/kirby3-srcset.svg?maxAge=1800) ![License](https://img.shields.io/github/license/mashape/apistatus.svg) ![Kirby Version](https://img.shields.io/badge/Kirby-3%2B-black.svg)
 
-Kirby 3 Plugin for creating image srcset using picture element
+Kirby 3 Plugin for creating image srcset using picture or image element
 
 This plugin is free but if you use it in a commercial project please consider to [make a donation 🍻](https://www.paypal.me/bnomei/3).
 
@@ -19,8 +19,8 @@ This plugin is free but if you use it in a commercial project please consider to
 
 ```php
     echo $page->image('ukulele.jpg')->srcset();
-    echo $page->image('ukulele.jpg')->srcset('default');
-    echo $page->image('ukulele.jpg')->srcset('breakpoints');
+    echo $page->image('ukulele.jpg')->srcset('default'); // 320 and original file size
+    echo $page->image('ukulele.jpg')->srcset('breakpoints'); // 576, 768, 992, 1200
     echo $page->image('ukulele.jpg')->srcset([320, 640, 960]);
 
     // choosing if lazy is possible global or override on call
@@ -75,9 +75,11 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Options explained
 ```php
 'lazy' => false, // bool or class-name, for lozad or lazysizes etc. true => 'lazyload'
+'autosizes' => false, // if true will add `data-sizes="auto"`
+'snippet' => 'plugin-srcset-picture', // or plugin-srcset-img
 // override preset array to create your own list of widths
 'presets' => [
-    'default' => [320], // will generate original and 320px width thumb
+    'default' => [0, 320], // will generate original (value = 0) and 320px width thumb
     'breakpoints' => [576, 768, 992, 1200], // common breakpoints
 ],
 // https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php
@@ -95,6 +97,14 @@ This plugin is free but if you use it in a commercial project please consider to
 ```
 
 ## Other Settings
+
+**autosizes**
+- default: `false` Please [read the manual](https://github.com/aFarkas/lazysizes#markup-api) before activating this setting. 
+
+> TIP: You might need to add CSS as well.
+```css
+img[data-sizes="auto"] { display: block; width: 100%; }
+```
 
 **img.alt.fieldname**
 - default: `caption` will call $file->caption()` if exists or use `$file->filename()`
