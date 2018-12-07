@@ -4,7 +4,12 @@
 
 Kirby 3 Plugin for creating image srcset using picture or image element
 
-This plugin is free but if you use it in a commercial project please consider to [make a donation 🍻](https://www.paypal.me/bnomei/3).
+## Commerical Usage
+
+This plugin is free but if you use it in a commercial project please consider to 
+- [make a donation 🍻](https://www.paypal.me/bnomei/3) or
+- [buy me ☕](https://buymeacoff.ee/bnomei) or
+- [buy a Kirby license using this affiliate link](https://a.paddle.com/v2/click/1129/35731?link=1170)
 
 ## Notice
 
@@ -15,7 +20,7 @@ This plugin is free but if you use it in a commercial project please consider to
 - A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) will create these on-the-fly based on actual screen size of image.
 
 
-## Usage
+## Setup
 
 ```php
     echo $page->image('ukulele.jpg')->srcset();
@@ -71,6 +76,7 @@ This plugin is free but if you use it in a commercial project please consider to
 ## FAQ
 
 - [Override default image tag](https://github.com/bnomei/kirby3-srcset/issues/2)
+- [How to solve low resolution images on first load?](https://github.com/bnomei/kirby3-srcset/issues/5)
 
 ## Options explained
 ```php
