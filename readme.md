@@ -23,14 +23,13 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Setup
 
 ```php
-    echo $page->image('ukulele.jpg')->srcset();
-    echo $page->image('ukulele.jpg')->srcset('default'); // 320 and original file size
-    echo $page->image('ukulele.jpg')->srcset('breakpoints'); // 576, 768, 992, 1200
-    echo $page->image('ukulele.jpg')->srcset([320, 640, 960]);
-
-    // choosing if lazy is possible global or override on call
-    // default: null => config value, true => will be flagged for lazyloading
-    echo $page->image('ukulele.jpg')->srcset('breakpoints', true); // null, true, false, 'classname'
+echo $page->image('ukulele.jpg')->srcset();
+echo $page->image('ukulele.jpg')->srcset('default'); // 320 and originalfile size
+echo $page->image('ukulele.jpg')->srcset('breakpoints'); // 576, 768, 992,1200
+echo $page->image('ukulele.jpg')->srcset([320, 640, 960]);
+// choosing if lazy is possible global or override on call
+// default: null => config value, true => will be flagged for lazyloading
+echo $page->image('ukulele.jpg')->srcset('breakpoints', true); // null,true, false, 'classname'
 ```
 
 **non-lazy**
