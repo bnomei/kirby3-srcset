@@ -15,9 +15,9 @@ This plugin is free but if you use it in a commercial project please consider to
 
 - Why the picture element? Because having multiple `sources` with different mime types can improve pagespeed. For example: This is the only way to use `webp` and have a fallack to `jpg` for browsers that [do not support it](https://caniuse.com/#feat=webp).
 - You will need a Picture Polyfill for [IE11 support](https://caniuse.com/#search=picture). This plugin does not provide this.
-- This plugin is only a quick hack until @fabianmichael ports his [awesome imageset plugin](https://github.com/fabianmichael/kirby-imageset) for Kirby 3
+- But you can also use image element. see `snippet` setting.
 - Javascript library for lazy loading is not included since that should be part of the websites build chain.
-- A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) will create these on-the-fly based on actual screen size of image.
+- A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) can create these on-the-fly based on actual screen size of image. see `autosizes` setting.
 
 
 ## Setup
@@ -39,6 +39,12 @@ This plugin is free but if you use it in a commercial project please consider to
     <source srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w" type="image/jpeg" />
     <img src="http://../media/pages/home/test-960x480-q90.jpg" alt="test.jpg or img.alt.fieldname" />
 </picture>
+<!-- or -->
+<img
+    srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w"
+    src="http://../media/pages/home/test-960x480-q90.jpg" 
+    alt="test.jpg or img.alt.fieldname"
+/>
 ```
 
 **lazy**
@@ -47,6 +53,14 @@ This plugin is free but if you use it in a commercial project please consider to
     <source data-srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w" type="image/jpeg" />
     <img class="lazyload" data-src="http://../media/pages/home/test-960x480-q900.jpg" alt="test.jpg or img.alt.fieldname" />
 </picture>
+<!-- or -->
+<img
+    class="srcset lazyload"
+    data-preset="default"
+    data-srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w"
+    data-src="http://../media/pages/home/test-960x480-q90.jpg" 
+    alt="test.jpg or img.alt.fieldname"
+/>
 ```
 
 ## Usage Kirby Tag
