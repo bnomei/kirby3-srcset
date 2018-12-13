@@ -70,6 +70,10 @@ This plugin is free but if you use it in a commercial project please consider to
 
 # but NOT ranges (like imageset does)
 (srcset: myfile.jpg preset: 320-960, 3) // fails!
+
+# link and class do work like with (image: )
+(srcset: myfile.jpg link: mypdf.pdf)
+(srcset: myfile.jpg class: myclass)
 ```
 
 
