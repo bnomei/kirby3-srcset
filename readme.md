@@ -117,7 +117,7 @@ img[data-sizes="auto"] { display: block; width: 100%; }
 ```
 
 **img.alt.fieldname**
-- default: `caption` will call $file->caption()` if exists or use `$file->filename()`
+- default: `caption` will call `$file->caption()` if exists or use `$file->filename()`
 
 **types.addsource**
 - default: `false` will not automatically add mime-type of source to registered types. But if no type is set (empty array) the mime type of source is added.
