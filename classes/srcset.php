@@ -81,7 +81,7 @@ class Srcset
             foreach ($presetWidths as $p) {
                 if($p <= 0) continue;
                 $img = static::resizeWithType($file, intval($p), strval($t));
-                if ($img && is_a($img, 'Kirby\CMS\File')) {
+                if ($img && (is_a($img, 'Kirby\CMS\FileVersion') || is_a($img, 'Kirby\CMS\File'))) {
                     $srcset[] = $img->url() . ' ' . $p . 'w';
                 }
             }
