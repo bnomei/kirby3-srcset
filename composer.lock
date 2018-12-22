@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0943f978df1e5f045cc530d409740684",
+    "content-hash": "0bd2e9e10e13dacbf8c84e9109b8159f",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -46,113 +46,17 @@
             "time": "2017-09-12T09:03:56+00:00"
         },
         {
-            "name": "erusev/parsedown",
-            "version": "1.8.0-beta-5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown.git",
-                "reference": "c26a2ee4bf8ba0270daab7da0353f2525ca6564a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/c26a2ee4bf8ba0270daab7da0353f2525ca6564a",
-                "reference": "c26a2ee4bf8ba0270daab7da0353f2525ca6564a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Parsedown": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "Parser for Markdown.",
-            "homepage": "http://parsedown.org",
-            "keywords": [
-                "markdown",
-                "parser"
-            ],
-            "time": "2018-06-11T18:15:32+00:00"
-        },
-        {
-            "name": "erusev/parsedown-extra",
-            "version": "0.8.0-beta-1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/erusev/parsedown-extra.git",
-                "reference": "e756b1bf8642ab1091403e902b0503f1cec7527d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/e756b1bf8642ab1091403e902b0503f1cec7527d",
-                "reference": "e756b1bf8642ab1091403e902b0503f1cec7527d",
-                "shasum": ""
-            },
-            "require": {
-                "erusev/parsedown": "^1.8.0|^1.8.0-beta-4",
-                "ext-dom": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.3.6"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "ParsedownExtra": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Emanuil Rusev",
-                    "email": "hello@erusev.com",
-                    "homepage": "http://erusev.com"
-                }
-            ],
-            "description": "An extension of Parsedown that adds support for Markdown Extra.",
-            "homepage": "https://github.com/erusev/parsedown-extra",
-            "keywords": [
-                "markdown",
-                "markdown extra",
-                "parsedown",
-                "parser"
-            ],
-            "time": "2018-05-08T21:54:32+00:00"
-        },
-        {
             "name": "filp/whoops",
-            "version": "2.2.1",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "e79cd403fb77fc8963a99ecc30e80ddd885b3311"
+                "reference": "bc0fd11bc455cc20ee4b5edabc63ebbf859324c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/e79cd403fb77fc8963a99ecc30e80ddd885b3311",
-                "reference": "e79cd403fb77fc8963a99ecc30e80ddd885b3311",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/bc0fd11bc455cc20ee4b5edabc63ebbf859324c7",
+                "reference": "bc0fd11bc455cc20ee4b5edabc63ebbf859324c7",
                 "shasum": ""
             },
             "require": {
@@ -200,20 +104,20 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2018-06-30T13:14:06+00:00"
+            "time": "2018-10-23T09:00:00+00:00"
         },
         {
             "name": "getkirby/cms",
-            "version": "dev-master",
+            "version": "3.0.0-RC-2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/k-next/kirby.git",
-                "reference": "afa6cae12965abe383a8797c37337de0a5b75e68"
+                "reference": "0d24600687e74ed74a9005e80d8ac740400c420b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/k-next/kirby/zipball/afa6cae12965abe383a8797c37337de0a5b75e68",
-                "reference": "afa6cae12965abe383a8797c37337de0a5b75e68",
+                "url": "https://api.github.com/repos/k-next/kirby/zipball/0d24600687e74ed74a9005e80d8ac740400c420b",
+                "reference": "0d24600687e74ed74a9005e80d8ac740400c420b",
                 "shasum": ""
             },
             "archive": {
@@ -248,25 +152,29 @@
             },
             "require": {
                 "claviska/simpleimage": "3.3.*",
-                "erusev/parsedown-extra": "0.8.*",
                 "ext-mbstring": "*",
-                "filp/whoops": "2.2.*",
+                "filp/whoops": "2.3.*",
+                "getkirby/composer-installer": "*",
                 "michelf/php-smartypants": "1.8.*",
                 "mustangostang/spyc": "0.6.*",
                 "php": ">=7.1.0",
                 "phpmailer/phpmailer": "6.0.*",
-                "true/punycode": "2.1.*"
+                "true/punycode": "2.1.*",
+                "zendframework/zend-escaper": "2.6.*"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.11.1",
                 "phpunit/phpunit": "^6.0"
             },
-            "type": "library",
+            "type": "kirby-cms",
             "autoload": {
                 "files": [
                     "config/helpers.php",
                     "config/aliases.php"
                 ],
+                "psr-0": {
+                    "Parsedown": "dependencies/"
+                },
                 "psr-4": {
                     "Kirby\\": "src/"
                 }
@@ -287,13 +195,13 @@
                     "./scripts/build"
                 ],
                 "fix": [
-                    "./vendor/bin/php-cs-fixer fix ./src/"
+                    "./vendor/bin/php-cs-fixer fix ."
                 ]
             },
             "authors": [
                 {
-                    "name": "Bastian Allgeier",
-                    "email": "bastian@getkirby.com",
+                    "name": "Kirby Team",
+                    "email": "support@getkirby.com",
                     "homepage": "https://getkirby.com"
                 }
             ],
@@ -309,7 +217,45 @@
                 "forum": "https://forum.getkirby.com",
                 "source": "https://github.com/getkirby/kirby"
             },
-            "time": "2018-11-04T14:09:05+00:00"
+            "time": "2018-12-21T11:50:32+00:00"
+        },
+        {
+            "name": "getkirby/composer-installer",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/k-next/composer-installer.git",
+                "reference": "dc0e38c4f0fc04875c1a523d82364a44f436cbf4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/k-next/composer-installer/zipball/dc0e38c4f0fc04875c1a523d82364a44f436cbf4",
+                "reference": "dc0e38c4f0fc04875c1a523d82364a44f436cbf4",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0"
+            },
+            "require-dev": {
+                "composer/composer": "^1.3",
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Kirby\\ComposerInstaller\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kirby\\ComposerInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Kirby's custom Composer installer for the Kirby CMS",
+            "homepage": "https://getkirby.com",
+            "time": "2018-12-19T10:01:45+00:00"
         },
         {
             "name": "league/color-extractor",
@@ -467,16 +413,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.5",
+            "version": "v6.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32"
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cb3ea134d4d3729e7857737d5f320cce9caf4d32",
-                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/8190d73eb5def11a43cfb020b7f36db65330698c",
+                "reference": "8190d73eb5def11a43cfb020b7f36db65330698c",
                 "shasum": ""
             },
             "require": {
@@ -529,20 +475,20 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-03-27T13:49:45+00:00"
+            "time": "2018-11-16T00:41:32+00:00"
         },
         {
             "name": "psr/log",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
                 "shasum": ""
             },
             "require": {
@@ -576,7 +522,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2018-11-20T15:27:04+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -682,23 +628,63 @@
                 "punycode"
             ],
             "time": "2016-11-16T10:37:54+00:00"
+        },
+        {
+            "name": "zendframework/zend-escaper",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-escaper.git",
+                "reference": "31d8aafae982f9568287cb4dce987e6aff8fd074"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-escaper/zipball/31d8aafae982f9568287cb4dce987e6aff8fd074",
+                "reference": "31d8aafae982f9568287cb4dce987e6aff8fd074",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+                "zendframework/zend-coding-standard": "~1.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6.x-dev",
+                    "dev-develop": "2.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Escaper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Securely and safely escape HTML, HTML attributes, JavaScript, CSS, and URLs",
+            "keywords": [
+                "ZendFramework",
+                "escaper",
+                "zf"
+            ],
+            "time": "2018-04-25T15:48:53+00:00"
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "alias": "3.0.0",
-            "alias_normalized": "3.0.0.0",
-            "version": "9999999-dev",
-            "package": "getkirby/cms"
-        }
-    ],
-    "minimum-stability": "beta",
+    "aliases": [],
+    "minimum-stability": "stable",
     "stability-flags": {
-        "getkirby/cms": 20
+        "getkirby/cms": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.1.0"
+    },
     "platform-dev": []
 }
