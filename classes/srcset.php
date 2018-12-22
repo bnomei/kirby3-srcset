@@ -38,7 +38,8 @@ class Srcset
         }
     }
 
-    public static function presetWidthsForFile($file, $preset = 'default') {
+    public static function presetWidthsForFile($file, $preset = 'default')
+    {
         $presets = option('bnomei.srcset.presets');
         $presetWidths = is_array($preset) ? $preset : \Kirby\Toolkit\A::get($presets, $preset, []);
         if (in_array(0, $presetWidths) || count($presetWidths) == 0) {
@@ -79,7 +80,9 @@ class Srcset
         foreach ($types as $t) {
             $srcset = [];
             foreach ($presetWidths as $p) {
-                if($p <= 0) continue;
+                if ($p <= 0) {
+                    continue;
+                }
                 $img = static::resizeWithType($file, intval($p), strval($t));
                 if ($img && (is_a($img, 'Kirby\CMS\FileVersion') || is_a($img, 'Kirby\CMS\File'))) {
                     $srcset[] = $img->url() . ' ' . $p . 'w';
