@@ -1,7 +1,7 @@
 {
     "name": "bnomei/kirby3-srcset",
-    "type": "plugin",
-    "version": "1.2.4",
+    "type": "kirby-plugin",
+    "version": "1.3.0",
     "license": "MIT",
     "description": "Kirby 3 Plugin for creating image srcset using picture or image element",
     "authors": [
@@ -22,12 +22,7 @@
         "lazysizes",
         "source"
     ],
-    "suggest": {
-    },
     "autoload": {
-        "files": [
-            "config.php"
-        ],
         "psr-4": {
             "Bnomei\\": "classes/"
         }
@@ -36,27 +31,8 @@
         "optimize-autoloader": true,
         "sort-packages": true
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/k-next/kirby"
-        }
-    ],
     "require": {
         "php": ">=7.1.0",
-        "getkirby/cms": "^3.0.0-RC-2.0"
-    },
-    "conflict": {
-        "getkirby/kirby": "<3.0"
-    },
-    "scripts": {
-        "zip": [
-            "rm kirby3-srcset.zip",
-            "composer install --no-dev",
-            "composer remove getkirby/cms",
-            "composer dumpautoload -o",
-            "zip -r kirby3-srcset.zip . -x *.git*",
-            "composer require getkirby/cms:'^3.0.0-RC-2.0'"
-        ]
+        "getkirby/composer-installer": "^1.1"
     }
 }
