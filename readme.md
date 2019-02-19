@@ -35,6 +35,8 @@ echo $page->image('ukulele.jpg')->srcset([320, 640, 960]);
 // choosing if lazy is possible global or override on call
 // default: null => config value, true => will be flagged for lazyloading
 echo $page->image('ukulele.jpg')->srcset('breakpoints', true); // null,true, false, 'classname'
+echo $page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-'); // null, false, 'data-'
+echo $page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-flickity-lazyload-'); // null, false, 'data-'
 ```
 
 **non-lazy**
@@ -99,10 +101,12 @@ echo $page->image('ukulele.jpg')->srcset('breakpoints', true); // null,true, fal
 
 - [Override default image tag](https://github.com/bnomei/kirby3-srcset/issues/2)
 - [How to solve low resolution images on first load?](https://github.com/bnomei/kirby3-srcset/issues/5)
+- [Lazyloading with Flickity](https://flickity.metafizzy.co/options.html#lazyload)? Do `lazy.prefix => data-flickity-lazyload-` and `snippet => plugin-srcset-img`.
 
 ## Options explained
 ```php
 'lazy' => false, // bool or class-name, for lozad or lazysizes etc. true => 'lazyload'
+'lazy.prefix' => 'data-', // bool or prefix before srcset and src when doint lazy loading.
 'autosizes' => false, // if true will add `data-sizes="auto"`
 'snippet' => 'plugin-srcset-picture', // or plugin-srcset-img
 // override preset array to create your own list of widths
@@ -128,6 +132,10 @@ echo $page->image('ukulele.jpg')->srcset('breakpoints', true); // null,true, fal
 
 **autosizes**
 - default: `false` Please [read the manual](https://github.com/aFarkas/lazysizes#markup-api) before activating this setting. 
+
+**lazy.prefix**
+- default: `data-`. This can be used to add [Flickity Lazyloading](https://flickity.metafizzy.co/options.html#lazyload).
+- example: `$page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-flickity-lazyload-');`
 
 > TIP: You might need to add CSS as well.
 ```css
