@@ -30,24 +30,39 @@ Kirby::plugin('bnomei/srcset', [
     ],
     'tags' => [
         'srcset' => [
-            'attr' => ['preset', 'lazy', 'link', 'class', 'prefix'],
+            // https://getkirby.com/docs/reference/text/kirbytags/image
+            'attr' => ['preset', 'lazy', 'prefix', 'class', 'imgclass', 'link', 'linkclass', 'target', 'rel'],
             'html' => function ($tag) {
                 try {
                     $file = Kirby::instance()->file($tag->value, $tag->parent());
-                    $preset = (string) $tag->preset;
-                    $prefix = (string) $tag->prefix;
-                    if (\Kirby\Toolkit\Str::contains($preset, ' ') || \Kirby\Toolkit\Str::contains($preset, ',')) {
-                        $preset = str_replace(['[',']',',','  ','px'], ['','',' ',' ',''], $preset);
-                        $preset = array_map(function ($v) {
-                            return trim($v);
-                        }, explode(' ', $preset));
-                    }
                     if ($file) {
-                        $srcset = \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy), $prefix);
-                        if ($tag->link && $tag->class) {
-                            return '<a href="'.url($tag->link).'" class="'.$tag->class.'">'.$srcset.'</a>';
-                        } elseif ($tag->link) {
-                            return '<a href="'.url($tag->link).'">'.$srcset.'</a>';
+                        $preset = (string) $tag->preset;
+                        if (\Kirby\Toolkit\Str::contains($preset, ' ') || \Kirby\Toolkit\Str::contains($preset, ',')) {
+                            $preset = str_replace(['[',']',',','  ','px'], ['','',' ',' ',''], $preset);
+                            $preset = array_map(function ($v) {
+                                return trim($v);
+                            }, explode(' ', $preset));
+                        }
+                        $prefix = (string) $tag->prefix;
+                        $class = $tag->class ? trim($tag->class) : null;
+                        $imgclass = $tag->imgclass ? trim($tag->imgclass) : null;
+                        $srcset = \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy), $prefix, $class, $imgclass);
+                        if ($tag->link) {
+                            $attr = [
+                                'href' => trim($tag->link),
+                            ];
+                            if ($tag->linkclass) {
+                                $attr['class'] = trim($tag->linkclass);
+                            }
+                            if ($tag->target) {
+                                $attr['target'] = trim($tag->target);
+                            }
+                            if ($tag->rel) {
+                                $attr['rel'] = trim($tag->rel);
+                            }
+                            // wrap $srcset in array to avoid encoding
+                            // https://github.com/getkirby/kirby/blob/master/src/Toolkit/Html.php#L367
+                            return \Kirby\Toolkit\Html::tag('a', [$srcset], $attr);
                         } else {
                             return $srcset.PHP_EOL;
                         }

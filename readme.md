@@ -91,9 +91,11 @@ echo $page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-flickity-laz
 # but NOT ranges (like imageset does)
 (srcset: myfile.jpg preset: 320-960, 3) // fails!
 
-# link and class do work like with (image: )
+# class, imgclass, link, linkclass, target and rel do work similar to (image: )
+https://getkirby.com/docs/reference/text/kirbytags/image
+
 (srcset: myfile.jpg link: mypdf.pdf)
-(srcset: myfile.jpg class: myclass)
+(srcset: myfile.jpg imglass: myclass)
 ```
 
 

@@ -4,7 +4,7 @@ namespace Bnomei;
 
 class Srcset
 {
-    public static function srcset(\Kirby\Cms\File $file, $preset = 'default', $lazy = null, $prefix = null)
+    public static function srcset(\Kirby\Cms\File $file, $preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null)
     {
         if (!$file || !is_a($file, 'Kirby\Cms\File')) {
             return null;
@@ -22,6 +22,8 @@ class Srcset
             'sources' => \Bnomei\Srcset::sources($file, $preset, $lazy),
             'autoSizes' => option('bnomei.srcset.autosizes'),
             'prefix' => $prefix ? $prefix : option('bnomei.srcset.prefix'),
+            'class' => $class ? $class : option('bnomei.srcset.class', ''),
+            'imgclass' => $imgclass ? $imgclass : option('bnomei.srcset.imgclass', ''),
         ], true);
     }
 
