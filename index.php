@@ -11,7 +11,6 @@ Kirby::plugin('bnomei/srcset', [
             'default' => [320, 0],
             'breakpoints' => [576, 768, 992, 1200],
         ],
-        'snippet' => 'plugin-srcset-picture',
         'types' => [],
         'resize' => function ($file, $width, $type) {
             // NOTE: override and do something with $type
@@ -24,14 +23,24 @@ Kirby::plugin('bnomei/srcset', [
         'plugin-srcset-image' => __DIR__ . '/snippets/srcset-img.php',
     ],
     'fileMethods' => [
-        'srcset' => function ($preset = 'default', $lazy = null, $prefix = null) {
-            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix);
-        }
+        'pictureElementWithSrcset' => function ($preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-picture') {
+            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix. $class, $imgclass, $snippet);
+        },
+        'picSrcset' => function ($preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-picture') {
+            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix. $class, $imgclass, $snippet);
+        },
+        'imgSrcset' => function ($preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-img') {
+            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix, $class, $imgclass, $snippet);
+        },
+        'imgElementWithSrcset' => function ($preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-img') {
+            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix, $class, $imgclass, $snippet);
+        },
+        // 'srcset' => function() { return null; } // #10, Removed since Kirby 3.1.0 added this File-Method with different results
     ],
     'tags' => [
         'srcset' => [
             // https://getkirby.com/docs/reference/text/kirbytags/image
-            'attr' => ['preset', 'lazy', 'prefix', 'class', 'imgclass', 'link', 'linkclass', 'target', 'rel'],
+            'attr' => ['preset', 'lazy', 'prefix', 'class', 'imgclass', 'link', 'linkclass', 'target', 'rel', 'snippet'],
             'html' => function ($tag) {
                 try {
                     $file = Kirby::instance()->file($tag->value, $tag->parent());
@@ -46,7 +55,8 @@ Kirby::plugin('bnomei/srcset', [
                         $prefix = (string) $tag->prefix;
                         $class = $tag->class ? trim($tag->class) : null;
                         $imgclass = $tag->imgclass ? trim($tag->imgclass) : null;
-                        $srcset = \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy), $prefix, $class, $imgclass);
+                        $snippet = $tag->snippet ? trim($tag->snippet) : 'plugin-srcset-img';
+                        $srcset = \Bnomei\Srcset::srcset($file, $preset, boolval($tag->lazy), $prefix, $class, $imgclass, $snippet);
                         if ($tag->link) {
                             $attr = [
                                 'href' => trim($tag->link),

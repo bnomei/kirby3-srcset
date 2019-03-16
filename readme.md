@@ -21,22 +21,32 @@ This plugin is free but if you use it in a commercial project please consider to
 
 - Why the picture element? Because having multiple `sources` with different mime types can improve pagespeed. For example: This is the only way to use `webp` and have a fallack to `jpg` for browsers that [do not support it](https://caniuse.com/#feat=webp).
 - You will need a Picture Polyfill for [IE11 support](https://caniuse.com/#search=picture). This plugin does not provide this.
-- But you can also use image element. see `snippet` setting. `'bnomei.srcset.snippet' => 'plugin-srcset-img',` in config file.
 - Javascript library for lazy loading is not included since that should be part of the websites build chain.
 - A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) can create these on-the-fly based on actual screen size of image. see `autosizes` setting.
 
 ## Setup
 
 ```php
-echo $page->image('ukulele.jpg')->srcset();
-echo $page->image('ukulele.jpg')->srcset('default'); // 320 and originalfile size
-echo $page->image('ukulele.jpg')->srcset('breakpoints'); // 576, 768, 992, 1200
-echo $page->image('ukulele.jpg')->srcset([320, 640, 960]);
+
+// ATTENTION: Since Kirby 3.1.0 this is a core File-Method and not from this plugin
+// echo $page->image('ukulele.jpg')->srcset();
+
+// plugin regular versions
+echo $page->image('ukulele.jpg')->imgElementWithSrcset();
+echo $page->image('ukulele.jpg')->pictureElementWithSrcset();
+
+// plugin short versions
+echo $page->image('ukulele.jpg')->imgSrcset();
+echo $page->image('ukulele.jpg')->picSrcset();
+
+echo $page->image('ukulele.jpg')->imgElementWithSrcset('default'); // 320 and originalfile size
+echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints'); // 576, 768, 992, 1200
+echo $page->image('ukulele.jpg')->imgElementWithSrcset([320, 640, 960]);
 // choosing if lazy is possible global or override on call
 // default: null => config value, true => will be flagged for lazyloading
-echo $page->image('ukulele.jpg')->srcset('breakpoints', true); // null,true, false, 'classname'
-echo $page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-'); // null, false, 'data-'
-echo $page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-flickity-lazyload-'); // null, false, 'data-'
+echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true); // null,true, false, 'classname'
+echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'data-'); // null, false, 'data-'
+echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'data-flickity-lazyload-'); // null, false, 'data-'
 ```
 
 **non-lazy**
@@ -81,6 +91,10 @@ echo $page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-flickity-laz
 (srcset: myfile.jpg preset: default)
 (srcset: myfile.jpg preset: breakpoints lazy: true)
 
+# change snippet, default is img element
+(srcset: myfile.jpg snippet: plugin-srcset-img)
+(srcset: myfile.jpg snippet: plugin-srcset-picture)
+
 # preset option takes various formats
 # string, number(s), with and without px, comma and brackets
 (srcset: myfile.jpg preset: breakpoints)
@@ -101,16 +115,16 @@ https://getkirby.com/docs/reference/text/kirbytags/image
 
 ## FAQ
 
+- [Plugin stopped working since Kirby 3.1.0](https://github.com/bnomei/kirby3-srcset/issues/10)
 - [Override default image tag](https://github.com/bnomei/kirby3-srcset/issues/2)
 - [How to solve low resolution images on first load?](https://github.com/bnomei/kirby3-srcset/issues/5)
-- [Lazyloading with Flickity](https://flickity.metafizzy.co/options.html#lazyload)? Do `lazy.prefix => data-flickity-lazyload-` and `snippet => plugin-srcset-img`.
+- [Lazyloading with Flickity](https://flickity.metafizzy.co/options.html#lazyload)? Do `lazy.prefix => data-flickity-lazyload-` and use `imgElementWithSrcset()`.
 
 ## Options explained
 ```php
 'lazy' => false, // bool or class-name, for lozad or lazysizes etc. true => 'lazyload'
 'lazy.prefix' => 'data-', // bool or prefix before srcset and src when doint lazy loading.
 'autosizes' => false, // if true will add `data-sizes="auto"`
-'snippet' => 'plugin-srcset-picture', // or plugin-srcset-img
 // override preset array to create your own list of widths
 'presets' => [
     'default' => [0, 320], // will generate original (value = 0) and 320px width thumb

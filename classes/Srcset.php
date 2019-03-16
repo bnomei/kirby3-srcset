@@ -4,7 +4,7 @@ namespace Bnomei;
 
 class Srcset
 {
-    public static function srcset(\Kirby\Cms\File $file, $preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null)
+    public static function srcset(\Kirby\Cms\File $file, $preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-img')
     {
         if (!$file || !is_a($file, 'Kirby\Cms\File')) {
             return null;
@@ -12,7 +12,6 @@ class Srcset
 
         $lazy = !is_null($lazy) ? $lazy : option('bnomei.srcset.lazy', false);
         $isLazy = $lazy !== null && $lazy !== false;
-        $snippet = trim(option('bnomei.srcset.snippet', 'plugin-srcset'));
         return snippet($snippet, [
             'file' => $file,
             'lazy' => (is_string($lazy) ? $lazy : ($lazy?'lazyload':'')),
