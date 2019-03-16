@@ -21,7 +21,7 @@ This plugin is free but if you use it in a commercial project please consider to
 
 - Why the picture element? Because having multiple `sources` with different mime types can improve pagespeed. For example: This is the only way to use `webp` and have a fallack to `jpg` for browsers that [do not support it](https://caniuse.com/#feat=webp).
 - You will need a Picture Polyfill for [IE11 support](https://caniuse.com/#search=picture). This plugin does not provide this.
-- Javascript library for lazy loading is not included since that should be part of the websites build chain.
+- Javascript library for **lazy loading is not included** since that should be part of the websites build chain.
 - A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) can create these on-the-fly based on actual screen size of image. see `autosizes` setting.
 
 ## Setup
