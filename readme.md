@@ -151,7 +151,7 @@ https://getkirby.com/docs/reference/text/kirbytags/image
 
 **lazy.prefix**
 - default: `data-`. This can be used to add [Flickity Lazyloading](https://flickity.metafizzy.co/options.html#lazyload).
-- example: `$page->image('ukulele.jpg')->srcset('breakpoints', true, 'data-flickity-lazyload-');`
+- example: `$page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'data-flickity-lazyload-');`
 
 > TIP: You might need to add CSS as well.
 ```css
