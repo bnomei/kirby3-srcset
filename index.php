@@ -24,10 +24,10 @@ Kirby::plugin('bnomei/srcset', [
     ],
     'fileMethods' => [
         'pictureElementWithSrcset' => function ($preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-picture') {
-            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix. $class, $imgclass, $snippet);
+            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix, $class, $imgclass, $snippet);
         },
         'picSrcset' => function ($preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-picture') {
-            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix. $class, $imgclass, $snippet);
+            return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix, $class, $imgclass, $snippet);
         },
         'imgSrcset' => function ($preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-img') {
             return \Bnomei\Srcset::srcset($this, $preset, $lazy, $prefix, $class, $imgclass, $snippet);
