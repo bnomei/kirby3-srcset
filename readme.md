@@ -10,9 +10,15 @@
 [![Gitter](https://flat.badgen.net/badge/gitter/chat?color=982ab3)](https://gitter.im/bnomei-kirby-3-plugins/community) 
 [![Twitter](https://flat.badgen.net/badge/twitter/bnomei?color=66d9ef)](https://twitter.com/bnomei)
 
-
-
 Kirby 3 Plugin for creating image srcset using picture or image element
+
+1. [Usage](https://github.com/bnomei/kirby3-srcset#usage)
+1. [Render non-lazy](https://github.com/bnomei/kirby3-srcset#render-no-lazy)
+1. [Render lazy](https://github.com/bnomei/kirby3-srcset#render-lazy)
+1. [Usage Kirby Tag](https://github.com/bnomei/kirby3-srcset#usage-kirby-tag)
+1. [Settings](https://github.com/bnomei/kirby3-srcset#faq)
+1. [FAQ](https://github.com/bnomei/kirby3-srcset#faq)
+
 
 ## Commerical Usage
 
@@ -27,14 +33,7 @@ This plugin is free but if you use it in a commercial project please consider to
 - `git submodule add https://github.com/bnomei/kirby3-srcset.git site/plugins/kirby3-srcset` or
 - `composer require bnomei/kirby3-srcset`
 
-## Notice
-
-- Why the picture element? Because having multiple `sources` with different mime types can improve pagespeed. For example: This is the only way to use `webp` and have a fallack to `jpg` for browsers that [do not support it](https://caniuse.com/#feat=webp).
-- You will need a Picture Polyfill for [IE11 support](https://caniuse.com/#search=picture). This plugin does not provide this.
-- Javascript library for **lazy loading is not included** since that should be part of the websites build chain.
-- A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) can create these on-the-fly based on actual screen size of image. see `autosizes` setting.
-
-## Setup
+## Usage
 
 ```php
 
@@ -59,7 +58,7 @@ echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'dat
 echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'data-flickity-lazyload-'); // null, false, 'data-'
 ```
 
-**non-lazy**
+#### render non-lazy
 ```html
 <picture class="srcset" data-preset="default">
     <source srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w" type="image/jpeg" />
@@ -73,7 +72,7 @@ echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'dat
 />
 ```
 
-**lazy**
+### render lazy
 ```html
 <picture class="srcset" data-preset="default">
     <source data-srcset="http://../media/pages/home/test-320x160-q90.jpg 320w, http://../media/pages/home/test-640x320-q90.jpg 640w, http://../media/pages/home/test-960x480-q90.jpg 960w" type="image/jpeg" />
@@ -122,31 +121,31 @@ https://getkirby.com/docs/reference/text/kirbytags/image
 (srcset: myfile.jpg imglass: myclass)
 ```
 
+## Settings
+| bnomei.srcset.            | Default        | Description               |            
+|---------------------------|----------------|---------------------------|
+| lazy | `false` | bool or class-name, for lozad or lazysizes etc. true => 'lazyload' |
+| lazy.prefix | `data-` | bool or prefix before srcset and src when doint lazy loading. This can be used to add [Flickity Lazyloading](https://flickity.metafizzy.co/options.html#lazyload). |
+| autosizes | `false` | if true will add `data-sizes="auto"`. Please [read the manual](https://github.com/aFarkas/lazysizes#markup-api) before activating this setting. |
+| presets | `array of arrays` | override preset array to create your own list of widths |
+| types | `[]` | |
+| resize | `callback` |
+| img.alt.fieldname | `caption` | will call `$file->caption()` if exists or use `$file->filename()` |
+| types.addsource | `false` | will not automatically add mime-type of source to registered types. But if no type is set (empty array) the mime type of source is added. |
+ 
+ #### Lazysizes with autosizes
+ 
+ You might need to add CSS as well.
+ 
+ ```css
+ img[data-sizes="auto"] { display: block; width: 100%; }
+ ```
 
-## FAQ
+#### About Types and Resize
 
-- [Plugin stopped working since Kirby 3.1.0](https://github.com/bnomei/kirby3-srcset/issues/10)
-- [Override default image tag](https://github.com/bnomei/kirby3-srcset/issues/2)
-- [How to solve low resolution images on first load?](https://github.com/bnomei/kirby3-srcset/issues/5)
-- [Lazyloading with Flickity](https://flickity.metafizzy.co/options.html#lazyload)? Do `lazy.prefix => data-flickity-lazyload-` and use `imgElementWithSrcset()`.
+By default only a source of same type a original will be added but setting [mime types](https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php) here you could add more but you have to create the variants yourself. there might be another plugin that can do that one day. then you can call it here and use the mime type.
 
-## Options explained
 ```php
-'lazy' => false, // bool or class-name, for lozad or lazysizes etc. true => 'lazyload'
-'lazy.prefix' => 'data-', // bool or prefix before srcset and src when doint lazy loading.
-'autosizes' => false, // if true will add `data-sizes="auto"`
-// override preset array to create your own list of widths
-'presets' => [
-    'default' => [0, 320], // will generate original (value = 0) and 320px width thumb
-    'breakpoints' => [576, 768, 992, 1200], // common breakpoints
-],
-// https://github.com/k-next/kirby/blob/master/src/Toolkit/Mime.php
-// by default only a source of same type a original will be added
-// but setting mime types here you could add more but...
-'types' => [],
-// ... you have to create the variants yourself. there might be
-// another plugin that can do that one day.
-// then you can call it here and use the mime type/
 'resize' => function (\Kirby\Cms\File $file, int $width, string $type) {
     // NOTE: override and do something with $type (mime type string)
     // return $file->yourImageConverter($width, $type);
@@ -154,26 +153,16 @@ https://getkirby.com/docs/reference/text/kirbytags/image
 }
 ```
 
-## Other Settings
+## FAQ
 
-**autosizes**
-- default: `false` Please [read the manual](https://github.com/aFarkas/lazysizes#markup-api) before activating this setting. 
-
-**lazy.prefix**
-- default: `data-`. This can be used to add [Flickity Lazyloading](https://flickity.metafizzy.co/options.html#lazyload).
-- example: `$page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'data-flickity-lazyload-');`
-
-> TIP: You might need to add CSS as well.
-```css
-img[data-sizes="auto"] { display: block; width: 100%; }
-```
-
-**img.alt.fieldname**
-- default: `caption` will call `$file->caption()` if exists or use `$file->filename()`
-
-**types.addsource**
-- default: `false` will not automatically add mime-type of source to registered types. But if no type is set (empty array) the mime type of source is added.
-
+- Why the picture element as well? Because having multiple `sources` with different mime types can improve pagespeed. For example: This is the only way to use `webp` and have a fallack to `jpg` for browsers that [do not support it](https://caniuse.com/#feat=webp).
+- You will need a Picture Polyfill for [IE11 support](https://caniuse.com/#search=picture). This plugin does not provide this.
+- Javascript library for **lazy loading is not included** since that should be part of the websites build chain.
+- A `sizes` attribute is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) can create these on-the-fly based on actual screen size of image. see `autosizes` setting.
+- [Plugin stopped working since Kirby 3.1.0](https://github.com/bnomei/kirby3-srcset/issues/10)
+- [Override default image tag](https://github.com/bnomei/kirby3-srcset/issues/2)
+- [How to solve low resolution images on first load?](https://github.com/bnomei/kirby3-srcset/issues/5)
+- [Lazyloading with Flickity](https://flickity.metafizzy.co/options.html#lazyload)? Do `lazy.prefix => data-flickity-lazyload-` and use `imgElementWithSrcset()`.
 
 ## Disclaimer
 
