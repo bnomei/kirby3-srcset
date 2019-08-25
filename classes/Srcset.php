@@ -14,8 +14,8 @@ class Srcset
         $isLazy = $lazy !== null && $lazy !== false;
 
         $img = $file;
-        if ($fallbackType = option('option.bnomei.srcset.fallback.type')) {
-            $img = $file->parent()->file();
+        if ($fallbackType = option('bnomei.srcset.fallback.type')) {
+            $img = $file->parent()->file(str_replace($img->extension(), $fallbackType, $img->filename()));
         }
 
         return snippet($snippet, [
