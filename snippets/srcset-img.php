@@ -6,5 +6,7 @@
         $firstSource = $s;
         break;
     }
+
+    // TODO: this is a mess. use kirby html class.
 ?>
 <img class="srcset <?= $lazy ?> <?= $class ?> <?= $imgclass ?>" <?= ($autoSizes?'data-sizes="auto"':'') ?> data-preset="<?= $preset ?>" <?= ($isLazy?$prefix:'') ?>srcset="<?= $firstSource['srcset'] ?>" <?= ($isLazy?$prefix:'') ?>src="<?= $img['src'] ?>" alt="<?= $img['alt'] ?>" />

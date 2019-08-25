@@ -12,12 +12,18 @@ class Srcset
 
         $lazy = !is_null($lazy) ? $lazy : option('bnomei.srcset.lazy', false);
         $isLazy = $lazy !== null && $lazy !== false;
+
+        $img = $file;
+        if ($fallbackType = option('option.bnomei.srcset.fallback.type')) {
+            $img = $file->parent()->file();
+        }
+
         return snippet($snippet, [
             'file' => $file,
-            'lazy' => (is_string($lazy) ? $lazy : ($lazy?'lazyload':'')),
+            'lazy' => (is_string($lazy) ? $lazy : ($lazy ? 'lazyload' : '')),
             'isLazy' => $isLazy,
             'preset' => is_array($preset) ? implode(', ', $preset) : $preset,
-            'img' => \Bnomei\Srcset::img($file, $preset, $lazy),
+            'img' => \Bnomei\Srcset::img($img, $preset, $lazy),
             'sources' => \Bnomei\Srcset::sources($file, $preset, $lazy),
             'autoSizes' => option('bnomei.srcset.autosizes'),
             'prefix' => $prefix ? $prefix : option('bnomei.srcset.prefix'),
@@ -60,7 +66,7 @@ class Srcset
         $captionFieldname = option('bnomei.srcset.img.alt.fieldname', 'caption');
         $presetWidths = self::presetWidthsForFile($file, $preset);
         return [
-            'src' => $file->resize($presetWidths[count($presetWidths)-1])->url(), // trigger thumb if needed
+            'src' => $file->resize($presetWidths[count($presetWidths) - 1])->url(), // trigger thumb if needed
             'alt' => $file->$captionFieldname()->isNotEmpty() ? $file->$captionFieldname()->value() : $file->filename(),
         ];
     }

@@ -12,12 +12,14 @@ Kirby::plugin('bnomei/srcset', [
             'breakpoints' => [576, 768, 992, 1200],
         ],
         'types' => [],
+        'picture.img.fallback.type' => null,
         'resize' => function ($file, $width, $type) {
             // NOTE: override and do something with $type
             return $file->resize($width);
-        }
+        },
     ],
     'snippets' => [
+        'plugin-srcset-pic' => __DIR__ . '/snippets/srcset-picture.php',
         'plugin-srcset-picture' => __DIR__ . '/snippets/srcset-picture.php',
         'plugin-srcset-img' => __DIR__ . '/snippets/srcset-img.php',
         'plugin-srcset-image' => __DIR__ . '/snippets/srcset-img.php',
@@ -42,12 +44,13 @@ Kirby::plugin('bnomei/srcset', [
             // https://getkirby.com/docs/reference/text/kirbytags/image
             'attr' => ['preset', 'lazy', 'prefix', 'class', 'imgclass', 'link', 'linkclass', 'target', 'rel', 'snippet'],
             'html' => function ($tag) {
+                // TODO: move code to class
                 try {
                     $file = Kirby::instance()->file($tag->value, $tag->parent());
                     if ($file) {
                         $preset = (string) $tag->preset;
                         if (\Kirby\Toolkit\Str::contains($preset, ' ') || \Kirby\Toolkit\Str::contains($preset, ',')) {
-                            $preset = str_replace(['[',']',',','  ','px'], ['','',' ',' ',''], $preset);
+                            $preset = str_replace(['[', ']', ',', '  ', 'px'], ['', '', ' ', ' ', ''], $preset);
                             $preset = array_map(function ($v) {
                                 return trim($v);
                             }, explode(' ', $preset));
@@ -74,14 +77,14 @@ Kirby::plugin('bnomei/srcset', [
                             // https://github.com/getkirby/kirby/blob/master/src/Toolkit/Html.php#L367
                             return \Kirby\Toolkit\Html::tag('a', [$srcset], $attr);
                         } else {
-                            return $srcset.PHP_EOL;
+                            return $srcset . PHP_EOL;
                         }
                     }
                     return '';
                 } catch (Exception $ex) {
                     return $ex->getMessage();
                 }
-            }
-        ]
-    ]
+            },
+        ],
+    ],
 ]);
