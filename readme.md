@@ -48,14 +48,26 @@ echo $page->image('ukulele.jpg')->pictureElementWithSrcset();
 echo $page->image('ukulele.jpg')->imgSrcset();
 echo $page->image('ukulele.jpg')->picSrcset();
 
-echo $page->image('ukulele.jpg')->imgElementWithSrcset('default'); // 320 and originalfile size
-echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints'); // 576, 768, 992, 1200
-echo $page->image('ukulele.jpg')->imgElementWithSrcset([320, 640, 960]);
+// 320 and originalfile size
+echo $page->image('ukulele.jpg')->imgSrcset('default');
+ 
+// 576, 768, 992, 1200
+echo $page->image('ukulele.jpg')->imgSrcset('breakpoints');
+ 
+// 320, 640, 960
+echo $page->image('ukulele.jpg')->imgSrcset([320, 640, 960]);
+
 // choosing if lazy is possible global or override on call
 // default: null => config value, true => will be flagged for lazyloading
-echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true); // null,true, false, 'classname'
-echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'data-'); // null, false, 'data-'
-echo $page->image('ukulele.jpg')->imgElementWithSrcset('breakpoints', true, 'data-flickity-lazyload-'); // null, false, 'data-'
+echo $page->image('ukulele.jpg')
+          ->imgSrcset('breakpoints', true); 
+          // null,true, false, 'classname'
+echo $page->image('ukulele.jpg')
+          ->imgSrcset('breakpoints', true, 'data-'); 
+          // null, false, 'data-'
+echo $page->image('ukulele.jpg')
+          ->imgSrcset('breakpoints', true, 'data-flickity-lazyload-'); 
+          // null, false, 'data-'
 ```
 
 #### render non-lazy
