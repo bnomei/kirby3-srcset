@@ -57,5 +57,8 @@
   },
   "extra": {
     "kirby-cms-path": "tests/kirby"
+  },
+  "suggest": {
+    "bnomei/kirby3-thumb-imageoptim": "Thumb driver component to automatically optimize images with the ImageOptim API (paid key required)."
   }
 }
