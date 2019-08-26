@@ -1,9 +1,9 @@
 {
   "name": "bnomei/kirby3-srcset",
   "type": "kirby-plugin",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "license": "MIT",
-  "description": "Kirby 3 Plugin for creating image srcset using picture or image element",
+  "description": "Kirby 3 Plugin for creating lazyloading image srcset",
   "authors": [
     {
       "name": "Bruno Meilick",
@@ -20,8 +20,13 @@
     "load",
     "images",
     "lazysizes",
-    "source",
-    "flickity"
+    "lozad.js",
+    "load.js",
+    "flickity",
+    "img",
+    "lazyload",
+    "kirbytag",
+    "editor-block"
   ],
   "autoload": {
     "psr-4": {
@@ -59,6 +64,6 @@
     "kirby-cms-path": "tests/kirby"
   },
   "suggest": {
-    "bnomei/kirby3-thumb-imageoptim": "Thumb driver component to automatically optimize images with the ImageOptim API (paid key required)."
+    "bnomei/kirby3-thumb-imageoptim": "Thumb driver component to automatically optimize images with the ImageOptim API (paid account required)."
   }
 }

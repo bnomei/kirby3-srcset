@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Bnomei\\Srcset' => $baseDir . '/classes/Srcset.php',
+    'Bnomei\\SrcsetFile' => $baseDir . '/classes/SrcsetFile.php',
     'Kirby\\ComposerInstaller\\CmsInstaller' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
     'Kirby\\ComposerInstaller\\Installer' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
     'Kirby\\ComposerInstaller\\Plugin' => $vendorDir . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',

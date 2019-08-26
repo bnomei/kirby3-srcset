@@ -1,107 +1,216 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bnomei;
 
-class Srcset
+use Kirby\Cms\KirbyTag;
+use Kirby\Toolkit\A;
+
+final class Srcset
 {
-    public static function srcset(\Kirby\Cms\File $file, $preset = 'default', $lazy = null, $prefix = null, $class = null, $imgclass = null, $snippet = 'plugin-srcset-img')
+    /*
+     * @var array
+     */
+    private $options;
+
+    /**
+     * @var array
+     */
+    private $data;
+
+    /*
+     * @var string
+     */
+    private $text;
+
+    /*
+     * @var misc
+     */
+    private $parent;
+
+    /*
+     * @var string
+     */
+    public const PLACEHOLDER = 'https://srcset.net/placeholder.jpg';
+
+    /**
+     * SrcsetTag constructor.
+     * @param null $data
+     */
+    public function __construct($data = null, array $options = [])
     {
-        if (!$file || !is_a($file, 'Kirby\Cms\File')) {
-            return null;
+        if (is_a($data, 'Kirby\Cms\KirbyTag')) {
+            $this->parent = $data->parent();
+            $options = $this->dataFromTag($data);
+        } elseif (is_a($data, 'Kirby\Cms\File') || is_a($data, 'Kirby\Cms\FileVersion')) {
+            $this->parent = $data->parent();
+            $options['value'] = $data->filename();
+        } elseif (is_array($data)) {
+            $this->parent = A::get($data, 'parent');
+            $options = $data;
         }
 
-        $lazy = !is_null($lazy) ? $lazy : option('bnomei.srcset.lazy', false);
-        $isLazy = $lazy !== null && $lazy !== false;
-
-        $img = $file;
-        if ($fallbackType = option('bnomei.srcset.fallback.type')) {
-            $img = $file->parent()->file(str_replace($img->extension(), $fallbackType, $img->filename()));
-        }
-
-        return snippet($snippet, [
-            'file' => $file,
-            'lazy' => (is_string($lazy) ? $lazy : ($lazy ? 'lazyload' : '')),
-            'isLazy' => $isLazy,
-            'preset' => is_array($preset) ? implode(', ', $preset) : $preset,
-            'img' => \Bnomei\Srcset::img($img, $preset, $lazy),
-            'sources' => \Bnomei\Srcset::sources($file, $preset, $lazy),
-            'autoSizes' => option('bnomei.srcset.autosizes'),
-            'prefix' => $prefix ? $prefix : option('bnomei.srcset.prefix'),
-            'class' => $class ? $class : option('bnomei.srcset.class', ''),
-            'imgclass' => $imgclass ? $imgclass : option('bnomei.srcset.imgclass', ''),
-        ], true);
-    }
-
-    public static function resizeWithType(\Kirby\Cms\File $file, int $width, string $type)
-    {
-        if (!$file || !is_a($file, 'Kirby\Cms\File')) {
-            return null;
-        }
-
-        $resize = option('bnomei.srcset.resize', null);
-        if ($resize && is_callable($resize)) {
-            return $resize($file, $width, $type);
-        } else {
-            return $file->resize($width);
-        }
-    }
-
-    public static function presetWidthsForFile($file, $preset = 'default')
-    {
-        $presets = option('bnomei.srcset.presets');
-        $presetWidths = is_array($preset) ? $preset : \Kirby\Toolkit\A::get($presets, $preset, []);
-        if (in_array(0, $presetWidths) || count($presetWidths) == 0) {
-            $presetWidths[] = intval($file->width());
-        }
-        sort($presetWidths, SORT_NUMERIC);
-        $presetWidths = array_unique($presetWidths);
-        return $presetWidths;
-    }
-
-    public static function img(\Kirby\Cms\File $file, $preset = 'default', $lazy = false)
-    {
-        if (!$file && !is_a($file, 'Kirby\Cms\File')) {
-            return null;
-        }
-        $captionFieldname = option('bnomei.srcset.img.alt.fieldname', 'caption');
-        $presetWidths = self::presetWidthsForFile($file, $preset);
-        return [
-            'src' => $file->resize($presetWidths[count($presetWidths) - 1])->url(), // trigger thumb if needed
-            'alt' => $file->$captionFieldname()->isNotEmpty() ? $file->$captionFieldname()->value() : $file->filename(),
+        $defaults = [
+            'lazy' => option('bnomei.srcset.lazy'),
+            'prefix' => option('bnomei.srcset.prefix'),
+            'autosizes' => option('bnomei.srcset.autosizes'),
+            'figure' => option('bnomei.srcset.figure') === true,
+            'quality' => intval(option('thumbs.quality', 80)),
         ];
+        $this->options = $this->normalizeData(array_merge($defaults, $options));
+
+        if ($this->parent) {
+            $this->options['file'] = $this->parent->file((string)A::get($this->options, 'value'));
+        }
+        $this->text = $this->imageKirbytagFromData($this->options);
+        $this->text = $this->applySrcset($this->text, $this->options);
     }
 
-    public static function sources(\Kirby\Cms\File $file, $preset = 'default', $lazy = false)
+    /**
+     * @param null $key
+     * @return array|mixed
+     */
+    public function option($key = null)
     {
-        if (!$file && !is_a($file, 'Kirby\Cms\File')) {
-            return null;
+        if ($key) {
+            return A::get($this->options, $key);
         }
 
-        $presetWidths = self::presetWidthsForFile($file, $preset);
+        return $this->options;
+    }
 
-        $types = option('bnomei.srcset.types', []);
-        if (count($types) == 0 || option('bnomei.srcset.types.addsource', false)) {
-            $types[] = $file->mime();
-        }
+    /**
+     * @return array
+     */
+    public function attrKeys(): array
+    {
+        return array_merge(
+            ['value'],
+            KirbyTag::$types['image']['attr'],
+            ['sizes', 'lazy', 'prefix', 'autosizes']
+        );
+    }
 
-        $sources = [];
-        foreach ($types as $t) {
-            $srcset = [];
-            foreach ($presetWidths as $p) {
-                if ($p <= 0) {
-                    continue;
-                }
-                $img = static::resizeWithType($file, intval($p), strval($t));
-                if ($img && (is_a($img, 'Kirby\CMS\FileVersion') || is_a($img, 'Kirby\CMS\File'))) {
-                    $srcset[] = $img->url() . ' ' . $p . 'w';
-                }
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function normalizeData(array $data)
+    {
+        $norm = [];
+        foreach ($data as $key => $val) {
+            if (is_string($val) && $val === 'true') {
+                $val = true;
             }
-            $sources[] = [
-                'srcset' => implode(', ', $srcset),
-                'type' => $t,
-            ];
+            if (is_string($val) && $val === 'false') {
+                $val = false;
+            }
+            if (is_string($val) && $val === 'null') {
+                $val = null;
+            }
+            if (is_null($val)) {
+                continue;
+            }
+            $norm[$key] = $val;
+        }
+        return $norm;
+    }
+
+    /**
+     * @param KirbyTag $tag
+     * @return array
+     */
+    public function dataFromTag(KirbyTag $tag)
+    {
+        $data = [];
+        foreach ($this->attrKeys() as $attr) {
+            $val = $tag->$attr;
+            if (is_null($val)) {
+                continue;
+            }
+            $data[$attr] = $tag->$attr;
+        }
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     * @return string
+     */
+    public function imageKirbytagFromData(array $data = []): string
+    {
+        $attrs = ['(image: ' . self::PLACEHOLDER]; // A::get($data, 'value')
+        $lazy = A::get($data, 'lazy');
+        if ($lazy) {
+            $data['imgclass'] = trim(A::get($data, 'imgclass', '') . ' ' . $lazy);
+        }
+        foreach (KirbyTag::$types['image']['attr'] as $attr) {
+            $val = A::get($data, $attr);
+            if (!$val || strlen(strval($val)) === 0) {
+                continue;
+            }
+            $attrs[] = $attr . ': ' . $val;
+        }
+        $attrs[] = ')';
+        $text = implode(' ', $attrs);
+
+        $text = kirby()->kirbytags($text, $data);
+        if (!A::get($data, 'figure')) {
+            $text = str_replace(['<figure>', '</figure>'], ['', ''], $text);
+        }
+        return $text;
+    }
+
+    /**
+     * @param string $text
+     * @param array $data
+     * @return string
+     */
+    public function applySrcset(string $text, array $data = []): string
+    {
+        $srcfile = new SrcsetFile(
+            A::get($data, 'file'),
+            A::get($data, 'sizes'),
+            A::get($data, 'width'),
+            A::get($data, 'heigth'),
+            A::get($data, 'quality')
+        );
+
+        $srcset = [
+            A::get($data, 'prefix') . 'src' => $srcfile->src(),
+            A::get($data, 'prefix') . 'srcset' => $srcfile->srcset(),
+        ];
+        if ($this->option('debug')) {
+            $srcset['data-thumb-srcset'] = $srcfile->sizes();
+        }
+        $autosizes = A::get($data, 'autosizes');
+        if ($autosizes === true) {
+            $autosizes = 'auto';
+        }
+        if ($autosizes) {
+            $srcset['data-sizes'] = $autosizes;
         }
 
-        return $sources;
+        $attrs = [];
+        foreach ($srcset as $key => $value) {
+            $attrs[] = '' . $key . '="' . $value . '"';
+        }
+
+        $text = str_replace(
+            'src="' . self::PLACEHOLDER . '"',
+            implode(' ', $attrs),
+            $text
+        );
+
+        return $text;
+    }
+
+    /**
+     * @return string
+     */
+    public function html(): string
+    {
+        return trim(strval($this->text));
     }
 }
