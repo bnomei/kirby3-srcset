@@ -8,7 +8,7 @@ Kirby::plugin('bnomei/srcset', [
         'prefix' => 'data-',
         'autosizes' => 'auto',
         'figure' => true,
-        'ratio' => true,
+        'ratio' => 'lazyload-ratio',
     ],
     'fileMethods' => [
         'lazysrcset' => function ($options = null) {
@@ -23,7 +23,7 @@ Kirby::plugin('bnomei/srcset', [
         'lazysrcset' => [
             'attr' => array_merge(
                 Kirby\Text\KirbyTag::$types['image']['attr'],
-                ['sizes', 'lazy', 'prefix', 'autosizes', 'quality', 'figure']
+                \Bnomei\Srcset::kirbytagAttrs()
             ),
             'html' => function ($tag) {
                 $srcsetTag = new \Bnomei\Srcset($tag);

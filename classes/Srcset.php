@@ -82,6 +82,11 @@ final class Srcset
         return $this->options;
     }
 
+    public static function kirbytagAttrs()
+    {
+        return ['sizes', 'lazy', 'prefix', 'autosizes', 'quality', 'figure', 'ratio'];
+    }
+
     /**
      * @return array
      */
@@ -90,7 +95,7 @@ final class Srcset
         return array_merge(
             ['value'],
             KirbyTag::$types['image']['attr'],
-            ['sizes', 'lazy', 'prefix', 'autosizes']
+            self::kirbytagAttrs()
         );
     }
 
