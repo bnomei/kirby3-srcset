@@ -162,6 +162,7 @@ echo $page->image('ukulele.jpg')->lazySrcset([
 - Why is there no `sizes` attribute? It is not defined since js lib [lazysizes](https://github.com/aFarkas/lazysizes) can create these on-the-fly based on actual screen size of image. see `autosizes` setting.
 - [Lazyloading with Flickity](https://flickity.metafizzy.co/options.html#lazyload)? Do `'prefix' => 'data-flickity-lazyload-'`.
 - Where is the picture element support? This plugin v2.x.x versions could do picture element. I removed that and focused on a better kribytag and lazyloading to make the plugin simpler again.
+- How do i solve images being loaded pushing content downwards? You could use a [technique utilizing padding-bottom on the figure element](https://forum.getkirby.com/t/kirby3-srcset-with-caption/15412/5) to set the ratio of the image.
 
 ## Works well with
 
