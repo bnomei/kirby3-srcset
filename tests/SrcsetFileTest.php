@@ -4,14 +4,19 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Bnomei\SrcsetFile;
 use Kirby\Cms\File;
+use Kirby\Image\Image;
 use PHPUnit\Framework\TestCase;
 
 final class SrcsetFileTest extends TestCase
 {
+    /*
+     * @var Kirby\Cms\File
+     */
     private $file;
+
     public function setUp(): void
     {
-        $this->file = page('home')->file('test2000.png');
+        $this->file = page('home')->image('test2000.png');
     }
 
     public function testConstucts()
@@ -77,5 +82,20 @@ final class SrcsetFileTest extends TestCase
 
         $srcfile = new SrcsetFile($this->file, 'breakpoints');
         $this->assertRegExp('/^.*(576w).*(768w).*(992w).*(1200w)$/', $srcfile->srcset());
+    }
+
+    public function testRatio()
+    {
+        $srcfile = new SrcsetFile($this->file, [320, 1200]);
+        $this->assertEquals(
+            strval(round($srcfile->image()->dimensions()->ratio()*100, 2)),
+            $srcfile->ratio()
+        );
+    }
+
+    public function testImage()
+    {
+        $srcfile = new SrcsetFile($this->file, [320, 1200]);
+        $this->assertInstanceOf(Image::class, $srcfile->image());
     }
 }

@@ -8,6 +8,7 @@ Kirby::plugin('bnomei/srcset', [
         'prefix' => 'data-',
         'autosizes' => 'auto',
         'figure' => true,
+        'ratio' => true,
     ],
     'fileMethods' => [
         'lazysrcset' => function ($options = null) {

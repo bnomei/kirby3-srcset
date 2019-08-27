@@ -68,7 +68,7 @@ final class SrcsetTest extends TestCase
         ]);
 
         $this->assertNotRegExp(
-            '/^<figure>.*<\/figure>$/',
+            '/^<figure.*<\/figure>$/',
             $srcset->html()
         );
 
@@ -97,6 +97,7 @@ final class SrcsetTest extends TestCase
             'prefix' => 'data-',
             'autosizes' => 'auto',
             'figure' => true,
+            'ratio' => false,
         ]);
         $text = $srcset->html();
 
@@ -111,9 +112,28 @@ final class SrcsetTest extends TestCase
             'prefix' => '',
             'autosizes' => 'null',
             'figure' => 'true',
+            'ratio' => false,
         ]);
         $text = $srcset->html();
         $textFromTag = kirby()->kirbytags('(lazysrcset: test2000.png sizes: default figure: true lazy: false autosizes: prefix: )', $this->data);
         $this->assertEquals($text, $textFromTag);
+    }
+
+    public function testFigure()
+    {
+        $srcset = new Srcset([
+            'value' => 'test2000.png',
+            'parent' => page('home'),
+            'lazy' => 'lazyload',
+            'class' => 'c-figure',
+            'autosizes' => true,
+            'figure' => true,
+            'ratio' => 'my-ratio-class',
+        ]);
+
+        $this->assertStringStartsWith(
+            '<style>figure.my-ratio-class[data-ratio="100"]{padding-bottom:100%;}</style><figure data-ratio="100" class="c-figure my-ratio-class">',
+            $srcset->html()
+        );
     }
 }

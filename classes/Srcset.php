@@ -56,6 +56,7 @@ final class Srcset
             'prefix' => option('bnomei.srcset.prefix'),
             'autosizes' => option('bnomei.srcset.autosizes'),
             'figure' => option('bnomei.srcset.figure') === true,
+            'ratio' => option('bnomei.srcset.ratio'),
             'quality' => intval(option('thumbs.quality', 80)),
         ];
         $this->options = $this->normalizeData(array_merge($defaults, $options));
@@ -65,6 +66,7 @@ final class Srcset
         }
         $this->text = $this->imageKirbytagFromData($this->options);
         $this->text = $this->applySrcset($this->text, $this->options);
+        $this->text = $this->applyRatio($this->text, $this->options);
     }
 
     /**
@@ -145,6 +147,9 @@ final class Srcset
         if ($lazy) {
             $data['imgclass'] = trim(A::get($data, 'imgclass', '') . ' ' . $lazy);
         }
+        if (A::get($data, 'ratio')) {
+            $data['class'] = trim(A::get($data, 'class', '') . ' ' . A::get($data, 'ratio'));
+        }
         foreach (KirbyTag::$types['image']['attr'] as $attr) {
             $val = A::get($data, $attr);
             if (!$val || strlen(strval($val)) === 0) {
@@ -157,7 +162,8 @@ final class Srcset
 
         $text = kirby()->kirbytags($text, $data);
         if (!A::get($data, 'figure')) {
-            $text = str_replace(['<figure>', '</figure>'], ['', ''], $text);
+            // <figure> </figure> and <figure class="" ...> </figure>
+            $text = preg_replace('/<(\/?)(figure[^>]*)>/',  '', $text);
         }
         return $text;
     }
@@ -181,8 +187,11 @@ final class Srcset
             A::get($data, 'prefix') . 'src' => $srcfile->src(),
             A::get($data, 'prefix') . 'srcset' => $srcfile->srcset(),
         ];
-        if ($this->option('debug')) {
+        if (A::get($data, 'debug')) {
             $srcset['data-thumb-srcset'] = $srcfile->sizes();
+        }
+        if (A::get($data, 'ratio')) {
+            $srcset['data-ratio'] = $srcfile->ratio();
         }
         $autosizes = A::get($data, 'autosizes');
         if ($autosizes === true) {
@@ -200,6 +209,35 @@ final class Srcset
         $text = str_replace(
             'src="' . self::PLACEHOLDER . '"',
             implode(' ', $attrs),
+            $text
+        );
+
+        return $text;
+    }
+
+    /**
+     * @param string $text
+     * @param array $data
+     * @return string
+     */
+    public function applyRatio(string $text, array $data = []): string
+    {
+        if (!A::get($data, 'figure') || !A::get($data, 'ratio')) {
+            return $text;
+        }
+
+        $srcfile = new SrcsetFile(
+            A::get($data, 'file'),
+            A::get($data, 'sizes'),
+            A::get($data, 'width'),
+            A::get($data, 'heigth'),
+            A::get($data, 'quality')
+        );
+        $ratio = $srcfile->ratio();
+
+        $text = str_replace(
+            '<figure',
+            '<style>figure.'.A::get($data, 'ratio').'[data-ratio="'.$ratio.'"]{padding-bottom:'.$ratio.'%;}</style><figure data-ratio="'.$ratio.'"',
             $text
         );
 

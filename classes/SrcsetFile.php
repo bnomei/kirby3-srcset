@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Bnomei;
 
 use Kirby\Cms\File;
+use Kirby\Image\Image;
 use Kirby\Toolkit\Str;
 
 final class SrcsetFile
@@ -13,6 +14,11 @@ final class SrcsetFile
      * @var File
      */
     private $file;
+
+    /*
+     * @var image
+     */
+    private $image;
 
     /*
      * @var array|string|null
@@ -45,6 +51,7 @@ final class SrcsetFile
     public function __construct(File $file, $sizes = null, ?int $width = null, ?int $height = null, ?int $quality = null)
     {
         $this->file = $file;
+        $this->image = new Image($file->root(), $file->url());
 
         if (is_callable($sizes)) {
             $sizes = $sizes();
@@ -88,5 +95,21 @@ final class SrcsetFile
             return json_encode($this->sizes, JSON_FORCE_OBJECT);
         }
         return strval($this->sizes);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function ratio(): string
+    {
+        return strval(round($this->image->dimensions()->ratio() * 100, 2));
+    }
+
+    /**
+     * @return Image
+     */
+    public function image(): Image
+    {
+        return $this->image;
     }
 }
