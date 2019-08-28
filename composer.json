@@ -29,8 +29,9 @@
   ],
   "autoload": {
     "psr-4": {
-      "Bnomei\\": "classes/"
-    }
+      "Bnomei\\": "classes/Bnomei"
+    },
+    "files": ["classes/Kirby/Editor/SrcsetBlock.php"]
   },
   "config": {
     "optimize-autoloader": true,

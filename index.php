@@ -10,6 +10,9 @@ Kirby::plugin('bnomei/srcset', [
         'figure' => true,
         'ratio' => 'lazyload-ratio',
     ],
+    'snippets' => [
+        'editor/srcset' => __DIR__ . '/snippets/srcset.php',
+    ],
     'fileMethods' => [
         'lazysrcset' => function ($options = null) {
             if (is_string($options)) {
@@ -31,4 +34,8 @@ Kirby::plugin('bnomei/srcset', [
             },
         ],
     ],
+    'translations' => [
+        'de'    => require __DIR__ . '/i18n/de.php',
+        'en'    => require __DIR__ . '/i18n/en.php',
+    ]
 ]);

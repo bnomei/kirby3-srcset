@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitdf6584c2850586221158c60b80af31fd
 {
+    public static $files = array (
+        'de6a0a44e3f6d42e601d67b362bd1a98' => __DIR__ . '/../..' . '/classes/Kirby/Editor/SrcsetBlock.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'K' => 
         array (
@@ -24,13 +28,13 @@ class ComposerStaticInitdf6584c2850586221158c60b80af31fd
         ),
         'Bnomei\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/classes',
+            0 => __DIR__ . '/../..' . '/classes/Bnomei',
         ),
     );
 
     public static $classMap = array (
-        'Bnomei\\Srcset' => __DIR__ . '/../..' . '/classes/Srcset.php',
-        'Bnomei\\SrcsetFile' => __DIR__ . '/../..' . '/classes/SrcsetFile.php',
+        'Bnomei\\Srcset' => __DIR__ . '/../..' . '/classes/Bnomei/Srcset.php',
+        'Bnomei\\SrcsetFile' => __DIR__ . '/../..' . '/classes/Bnomei/SrcsetFile.php',
         'Kirby\\ComposerInstaller\\CmsInstaller' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/CmsInstaller.php',
         'Kirby\\ComposerInstaller\\Installer' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Installer.php',
         'Kirby\\ComposerInstaller\\Plugin' => __DIR__ . '/..' . '/getkirby/composer-installer/src/ComposerInstaller/Plugin.php',

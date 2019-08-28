@@ -3,6 +3,8 @@
 .idea
 *.cache
 
+node_modules
+
 /tests/kirby
 /tests/logs
 /tests/media

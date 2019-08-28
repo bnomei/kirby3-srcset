@@ -14,11 +14,6 @@ final class Srcset
      */
     private $options;
 
-    /**
-     * @var array
-     */
-    private $data;
-
     /*
      * @var string
      */
