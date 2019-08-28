@@ -152,7 +152,7 @@ final class Srcset
         if ($lazy) {
             $data['imgclass'] = trim(A::get($data, 'imgclass', '') . ' ' . $lazy);
         }
-        if (A::get($data, 'ratio')) {
+        if (A::get($data, 'ratio') && !A::get($data, 'caption')) {
             $data['class'] = trim(A::get($data, 'class', '') . ' ' . A::get($data, 'ratio'));
         }
         foreach (KirbyTag::$types['image']['attr'] as $attr) {
@@ -194,9 +194,6 @@ final class Srcset
         ];
         if (A::get($data, 'debug')) {
             $srcset['data-thumb-srcset'] = $srcfile->sizes();
-        }
-        if (A::get($data, 'ratio')) {
-            $srcset['data-ratio'] = $srcfile->ratio();
         }
         $autosizes = A::get($data, 'autosizes');
         if ($autosizes === true) {
@@ -240,11 +237,21 @@ final class Srcset
         );
         $ratio = $srcfile->ratio();
 
-        $text = str_replace(
-            '<figure',
-            '<style>figure.'.A::get($data, 'ratio').'[data-ratio="'.$ratio.'"]{padding-bottom:'.$ratio.'%;}</style><figure data-ratio="'.$ratio.'"',
-            $text
-        );
+        $text = '<style>.'.A::get($data, 'ratio').'[data-ratio="'.$ratio.'"]{padding-bottom:'.$ratio.'%;}</style>' . $text;
+
+        if (A::get($data, 'caption')) {
+            $text = str_replace(
+                ['><img', '><figcaption>'],
+                ['><div class="'.A::get($data, 'ratio').'" data-ratio="'.$ratio.'"><img', '></div><figcaption>'],
+                $text
+            );
+        } else {
+            $text = str_replace(
+                '<figure',
+                '<figure data-ratio="'.$ratio.'"',
+                $text
+            );
+        }
 
         return $text;
     }

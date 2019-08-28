@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>figcaptionTest</title>
+    <link href="https://kirby3-plugins.bnomei.com/assets/css/app.css" rel="stylesheet">
+</head>
+<body>
+  <style>
+    .lazysrcset-ratio {
+      position: relative;
+    }
+    .lazysrcset-ratio > img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .lazysrcset-ratio > img:after {
+      content: '';
+      width: 100%;
+      height: 0;
+      display: block;
+    }
+    .TEST img {
+      opacity: 0.5;
+    }
+    .TEST .lazysrcset-ratio{
+      background: #272822;
+    }
+  </style>
+  <section class="flex flex-wrap TEST">
+    <style>.lazysrcset-ratio[data-ratio="100"]{padding-bottom:100%;}</style><figure><div class="lazysrcset-ratio" data-ratio="100"><img alt="" src="content/home/test2000.png"></div><figcaption>some caption</figcaption></figure>
+    <style>.lazysrcset-ratio[data-ratio="100"]{padding-bottom:100%;}</style><figure class="lazysrcset-ratio" data-ratio="100"><img alt="" src="content/home/test2000.png"></figure>
+  </section>
+</body>
+</html>

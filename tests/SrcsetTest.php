@@ -117,6 +117,21 @@ final class SrcsetTest extends TestCase
         $text = $srcset->html();
         $textFromTag = kirby()->kirbytags('(lazysrcset: test2000.png sizes: default figure: true lazy: false ratio: false autosizes: prefix: )', $this->data);
         $this->assertEquals($text, $textFromTag);
+
+        $srcset = new Srcset([
+            'value' => 'test2000.png',
+            'parent' => page('home'),
+            'sizes' => 'default',
+            'lazy' => 'false',
+            'prefix' => '',
+            'autosizes' => 'null',
+            'figure' => 'true',
+            'ratio' => 'lazysrcset-ratio',
+            'caption' => 'some caption'
+        ]);
+        $text = $srcset->html();
+        $textFromTag = kirby()->kirbytags('(lazysrcset: test2000.png sizes: default figure: true lazy: false ratio: lazysrcset-ratio autosizes: prefix: caption: some caption)', $this->data);
+        $this->assertEquals($text, $textFromTag);
     }
 
     public function testFigure()
@@ -132,7 +147,7 @@ final class SrcsetTest extends TestCase
         ]);
 
         $this->assertStringStartsWith(
-            '<style>figure.my-ratio-class[data-ratio="100"]{padding-bottom:100%;}</style><figure data-ratio="100" class="c-figure my-ratio-class">',
+            '<style>.my-ratio-class[data-ratio="100"]{padding-bottom:100%;}</style><figure data-ratio="100" class="c-figure my-ratio-class">',
             $srcset->html()
         );
     }
