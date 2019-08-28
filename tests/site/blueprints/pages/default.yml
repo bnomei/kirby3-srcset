@@ -1,0 +1,6 @@
+title: Default Page
+preset: page
+fields:
+  text:
+    label: Editor
+    type: editor

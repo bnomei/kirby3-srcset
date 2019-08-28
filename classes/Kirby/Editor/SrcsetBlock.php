@@ -6,6 +6,11 @@ use Throwable;
 
 // TODO: no coverage since no real tests
 // @codeCoverageIgnore
+
+if (!class_exists('Kirby\Editor\Block')) {
+    class Block { }
+}
+
 final class SrcsetBlock extends Block
 {
     public function controller(): array

@@ -10,6 +10,9 @@ node_modules
 /tests/media
 /tests/site/accounts
 /tests/site/cache
+/tests/site/sessions
+/tests/site/plugins/editor/**
+!/tests/site/plugins/editor/.gitkeep
 
 # files of Composer dependencies that are not needed for the plugin
 /vendor/**/.*

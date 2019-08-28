@@ -1,1 +1,1 @@
-<?php
+<?= $page->text()->blocks() ?>
