@@ -56,7 +56,7 @@ final class Srcset
         ];
         $this->options = $this->normalizeData(array_merge($defaults, $options));
 
-        if ($this->parent) {
+        if ($this->parent && !A::get($this->options, 'file')) {
             $this->options['file'] = $this->parent->file((string)A::get($this->options, 'value'));
         }
         $this->text = $this->imageKirbytagFromData($this->options);
@@ -128,10 +128,13 @@ final class Srcset
         $data = [];
         foreach ($this->attrKeys() as $attr) {
             $val = $tag->$attr;
+            if ($attr === 'value') {
+                $data['file'] = $tag->file(strval($val));
+            }
             if (is_null($val)) {
                 continue;
             }
-            $data[$attr] = $tag->$attr;
+            $data[$attr] = $val;
         }
         return $data;
     }

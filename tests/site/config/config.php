@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'debug' => true,
     'thumbs' => [
         'quality' => 42,
         'srcsets' => [

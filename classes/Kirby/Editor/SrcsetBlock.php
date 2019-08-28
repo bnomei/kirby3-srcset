@@ -4,13 +4,18 @@ namespace Kirby\Editor;
 
 use Throwable;
 
-// TODO: no coverage since no real tests
-// @codeCoverageIgnore
-
+if (!class_exists('Kirby\Editor\Block')) {
+    load([
+        'kirby\editor\block' => __DIR__ . '/../../../tests/site/plugins/editor/lib/Block.php',
+        'kirby\editor\blocks' => __DIR__ . '/../../../tests/site/plugins/editor/lib/Blocks.php',
+    ]);
+}
 if (!class_exists('Kirby\Editor\Block')) {
     class Block { }
 }
 
+// TODO: no coverage since no real tests
+// @codeCoverageIgnore
 final class SrcsetBlock extends Block
 {
     public function controller(): array
@@ -40,15 +45,17 @@ final class SrcsetBlock extends Block
     {
         $image = $this->image();
         $attrs = [
-            'image' => $image ? $image->id() : $this->attrs()->src(), // TODO: lazysrcset
+            'lazysrcset' => $image ? $image->id() : $this->attrs()->src(),
             'alt' => $this->attrs()->alt(),
             'link' => $this->attrs()->link(),
             'class' => $this->attrs()->css(),
+//            'hello' => class_exists('Kirby\Editor\Blocks') ? 'Blocks' : 'no',
             'caption' => $this->attrs()->caption(),
+
             // TODO: link Kirby\Text\KirbyTag::$types['image']['attr']
             // TODO: link \Bnomei\Srcset::kirbytagAttrs()
         ];
-        return kirbyTagMaker($attrs) . PHP_EOL . PHP_EOL;
+        return \kirbyTagMaker($attrs) . PHP_EOL . PHP_EOL;
     }
 
     public function toArray(): array

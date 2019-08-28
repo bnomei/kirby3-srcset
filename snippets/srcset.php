@@ -5,4 +5,4 @@
 // TODO: the plugin can render itself from its markdown
 /* <?= kirby()->kirbytags($block->markdown(), ['parent' => $page]) ?> */
 
-?><p>Render from markdown</p>
+?><?= kirby()->kirbytags($block->markdown(), ['parent' => $page]) ?>
