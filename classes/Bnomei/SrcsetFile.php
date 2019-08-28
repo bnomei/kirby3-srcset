@@ -102,7 +102,7 @@ final class SrcsetFile
      */
     public function ratio(): string
     {
-        return strval(round($this->image->dimensions()->ratio() * 100, 2));
+        return strval(round(100.0 / $this->image->dimensions()->ratio(), 2));
     }
 
     /**
