@@ -144,6 +144,7 @@ Add [aFarkas/lazysizes](https://github.com/aFarkas/lazysizes) to your js depende
 You will need some css to make the lazysizes lib automatic size detection work.
 
  ```css
+ figure { width: 100%; }
  img[data-sizes="auto"] { display: block; width: 100%; }
  ```
 
