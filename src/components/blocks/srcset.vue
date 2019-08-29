@@ -1,5 +1,9 @@
 <template>
     <div>
+        <k-dialog ref="settings" @submit="saveSettings" size="medium">
+            <k-form :fields="fields" v-model="attrs" @submit="saveSettings" />
+        </k-dialog>
+        
         <figure>
             <template v-if="attrs.src">
                 <div
@@ -17,10 +21,10 @@
                 </div>
                 <figcaption>
                     <k-editable
-                            :content="attrs.caption"
-                            :breaks="true"
-                            :placeholder="$t('editor.blocks.image.caption.placeholder') + '…'"
-                            @input="caption"
+                        :content="attrs.caption"
+                        :breaks="true"
+                        :placeholder="$t('editor.blocks.image.caption.placeholder') + '…'"
+                        @input="caption"
                     />
                 </figcaption>
             </template>
@@ -35,11 +39,6 @@
 
         <k-files-dialog ref="fileDialog" @submit="insertFile($event)" />
         <k-upload ref="fileUpload" @success="insertUpload" />
-
-        <k-dialog ref="settings" @submit="saveSettings" size="medium">
-            <k-form :fields="fields" v-model="attrs" @submit="saveSettings" />
-        </k-dialog>
-
     </div>
 </template>
 
@@ -81,6 +80,9 @@
                     }
                 };
             }
+        },
+        mounted() {
+            console.log(this.$refs)
         },
         methods: {
             caption(html) {
@@ -138,6 +140,7 @@
                         {
                             icon: "cog",
                             label: this.$t("editor.blocks.image.settings"),
+                            // click: console.log(this.$refs.settings)
                             click: this.$refs.settings.open
                         },
                         {
@@ -151,6 +154,7 @@
                 }
             },
             open() {
+                console.log('open');
                 window.open(this.attrs.src);
             },
             onLoad() {
@@ -174,7 +178,7 @@
                 });
             },
             settings() {
-                this.$refs.settings.open();
+                // this.$refs.settings.open();
             },
             saveSettings() {
                 this.$refs.settings.close();
