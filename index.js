@@ -8940,7 +8940,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 var _default = {
   icon: "image",
   props: {
@@ -8961,20 +8960,27 @@ var _default = {
     fields: function fields() {
       return {
         alt: {
-          label: this.$t('editor.blocks.image.alt.label'),
+          label: this.$t('editor.blocks.srcset.alt.label'),
           type: "text",
           icon: "text"
         },
         link: {
-          label: this.$t('editor.blocks.image.link.label'),
+          label: this.$t('editor.blocks.srcset.link.label'),
           type: "text",
           icon: "url",
-          placeholder: this.$t('editor.blocks.image.link.placeholder')
+          placeholder: this.$t('editor.blocks.srcset.link.placeholder')
         },
         css: {
-          label: this.$t('editor.blocks.image.css.label'),
+          label: this.$t('editor.blocks.srcset.css.label'),
           type: "text",
           icon: "code"
+        },
+        height: {
+          label: this.$t('editor.blocks.srcset.height.label'),
+          type: "number",
+          after: 'px',
+          icon: "smile" // ADD SETTINGS/FIELDS HERE!
+
         }
       };
     }
@@ -9021,20 +9027,20 @@ var _default = {
       if (this.attrs.src) {
         return [{
           icon: "open",
-          label: this.$t("editor.blocks.image.open.browser"),
-          click: this.open
+          label: this.$t("editor.blocks.srcset.open.browser"),
+          clicks: this.open
         }, {
           icon: "edit",
-          label: this.$t("editor.blocks.image.open.panel"),
+          label: this.$t("editor.blocks.srcset.open.panel"),
           click: this.edit,
           disabled: !this.attrs.guid
         }, {
           icon: "cog",
-          label: this.$t("editor.blocks.image.settings"),
+          label: this.$t("editor.blocks.srcset.settings"),
           click: this.$refs.settings.open
         }, {
           icon: "image",
-          label: this.$t("editor.blocks.image.replace"),
+          label: this.$t("editor.blocks.srcset.replace"),
           click: this.replace
         }];
       } else {
@@ -9042,6 +9048,8 @@ var _default = {
       }
     },
     open: function open() {
+      console.log('open');
+      debugger;
       window.open(this.attrs.src);
     },
     onLoad: function onLoad() {
@@ -9191,7 +9199,7 @@ exports.default = _default;
                         content: _vm.attrs.caption,
                         breaks: true,
                         placeholder:
-                          _vm.$t("editor.blocks.image.caption.placeholder") +
+                          _vm.$t("editor.blocks.srcset.caption.placeholder") +
                           "…"
                       },
                       on: { input: _vm.caption }
@@ -9215,11 +9223,11 @@ exports.default = _default;
                         attrs: { icon: "upload" },
                         on: { click: _vm.uploadFile }
                       },
-                      [_vm._v(_vm._s(_vm.$t("editor.blocks.image.upload")))]
+                      [_vm._v(_vm._s(_vm.$t("editor.blocks.srcset.upload")))]
                     ),
                     _vm._v(
                       "\n                " +
-                        _vm._s(_vm.$t("editor.blocks.image.or")) +
+                        _vm._s(_vm.$t("editor.blocks.srcset.or")) +
                         "\n                "
                     ),
                     _c(
@@ -9228,7 +9236,7 @@ exports.default = _default;
                         attrs: { icon: "image" },
                         on: { click: _vm.selectFile }
                       },
-                      [_vm._v(_vm._s(_vm.$t("editor.blocks.image.select")))]
+                      [_vm._v(_vm._s(_vm.$t("editor.blocks.srcset.select")))]
                     )
                   ],
                   1
@@ -9236,6 +9244,29 @@ exports.default = _default;
               ]
         ],
         2
+      ),
+      _vm._v(" "),
+      _c(
+        "k-dialog",
+        {
+          ref: "settings",
+          attrs: { size: "medium" },
+          on: { submit: _vm.saveSettings }
+        },
+        [
+          _c("k-form", {
+            attrs: { fields: _vm.fields },
+            on: { submit: _vm.saveSettings },
+            model: {
+              value: _vm.attrs,
+              callback: function($$v) {
+                _vm.attrs = $$v
+              },
+              expression: "attrs"
+            }
+          })
+        ],
+        1
       ),
       _vm._v(" "),
       _c(
@@ -9249,35 +9280,10 @@ exports.default = _default;
           }
         },
         [
-          _c(
-            "k-upload",
-            { ref: "fileUpload", on: { success: _vm.insertUpload } },
-            [
-              _c(
-                "k-dialog",
-                {
-                  ref: "settings",
-                  attrs: { size: "medium" },
-                  on: { submit: _vm.saveSettings }
-                },
-                [
-                  _c("k-form", {
-                    attrs: { fields: _vm.fields },
-                    on: { submit: _vm.saveSettings },
-                    model: {
-                      value: _vm.attrs,
-                      callback: function($$v) {
-                        _vm.attrs = $$v
-                      },
-                      expression: "attrs"
-                    }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          )
+          _c("k-upload", {
+            ref: "fileUpload",
+            on: { success: _vm.insertUpload }
+          })
         ],
         1
       )
@@ -9361,7 +9367,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53881" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49199" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

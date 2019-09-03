@@ -1,0 +1,20 @@
+Title: Home
+
+----
+
+Text:
+
+[
+    {
+        "attrs": {
+            "guid": "/pages/home/files/test500.png",
+            "src": "http://kirby3-srcset.test/media/pages/home/2419198082-1567057480/test500.png",
+            "id": "home/test500.png",
+            "ratio": 1,
+            "caption": ""
+        },
+        "content": "",
+        "id": "_u8xocxbb9",
+        "type": "srcset"
+    }
+]
