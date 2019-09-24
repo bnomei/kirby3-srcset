@@ -51,24 +51,23 @@
         </div>
       </template>
     </figure>
-
     <k-dialog ref="settings" @submit="saveSettings" size="medium">
       <k-form :fields="fields" v-model="attrs" @submit="saveSettings" />
     </k-dialog>
 
-    <k-files-dialog ref="fileDialog" @submit="insertFile($event)" />
-    <k-upload ref="fileUpload" @success="insertUpload" />
+    <k-files-dialog ref="fileDialog" @submit="insertFile($event)"></k-files-dialog>
+    <k-upload ref="fileUpload" @success="insertUpload"></k-upload>
   </div>
 </template>
 
 <script>
 export default {
   icon: "image",
-  // data() {
-  //   return {
-  //     options: []
-  //   };
-  // },
+  data() {
+    return {
+      options: []
+    };
+  },
   props: {
     endpoints: Object,
     attrs: {
@@ -77,12 +76,12 @@ export default {
         return {};
       }
     },
-    options: {
-      type: Object,
-      default() {
-        return {};
-      }
-    }
+    // options: {
+    //   type: Object,
+    //   default() {
+    //     return {};
+    //   }
+    // }
   },
   computed: {
     style() {
@@ -187,11 +186,15 @@ export default {
       };
     }
   },
+  mounted() {
+    this.fetchOptions("bnomei/srcset/options");
+  },
   methods: {
     fetchOptions(link) {
-      let that = this;
       this.$api.get(link).then(response => {
-        that.options = response;
+        this.$nextTick(() => {
+          this.options = response
+        })
       });
     },
     caption(html) {
@@ -262,13 +265,9 @@ export default {
       }
     },
     open() {
-      // console.log('open');
-      // debugger
       window.open(this.attrs.src);
     },
     onLoad() {
-      this.fetchOptions("bnomei/srcset/options");
-
       const image = this.$refs.image;
       if (!this.attrs.ratio && image && image.width && image.height) {
         this.input({
