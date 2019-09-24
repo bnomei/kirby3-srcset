@@ -88,7 +88,7 @@ This plugin is free but if you use it in a commercial project please consider to
 
 ## Usage Editor Block
 
-> Coming Soon
+![srcset editor block](https://raw.githubusercontent.com/bnomei/kirby3-srcset/master/kirby3-srcset-editor-block.png)
 
 ## Usage PHP
 
