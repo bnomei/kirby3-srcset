@@ -34,6 +34,16 @@ Kirby::plugin('bnomei/srcset', [
             },
         ],
     ],
+    'api' => [
+        'routes' => [
+            [
+                'pattern' => 'bnomei/srcset/options',
+                'action'  => function () {
+                    return \Bnomei\Srcset::defaultOptions();
+                }
+            ],
+        ],
+    ],
     'translations' => [
         'de'    => require __DIR__ . '/i18n/de.php',
         'en'    => require __DIR__ . '/i18n/en.php',
@@ -47,5 +57,5 @@ Kirby::plugin('bnomei/srcset', [
         'ru'    => require __DIR__ . '/i18n/ru.php',
         'sv_SE' => require __DIR__ . '/i18n/sv_SE.php',
         'tr'    => require __DIR__ . '/i18n/tr.php',
-    ]
+    ],
 ]);

@@ -46,14 +46,25 @@ final class SrcsetBlock extends Block
         $image = $this->image();
         $attrs = [
             'lazysrcset' => $image ? $image->id() : $this->attrs()->src(),
-            'alt' => $this->attrs()->alt(),
-            'link' => $this->attrs()->link(),
-            'class' => $this->attrs()->css(),
-//            'hello' => class_exists('Kirby\Editor\Blocks') ? 'Blocks' : 'no',
-            'caption' => $this->attrs()->caption(),
 
-            // TODO: link Kirby\Text\KirbyTag::$types['image']['attr']
-            // TODO: link \Bnomei\Srcset::kirbytagAttrs()
+            'alt' => $this->attrs()->alt(),
+            'caption' => $this->attrs()->caption(),
+            'class' => $this->attrs()->css(), // class is PHP keyword
+            'height' => $this->attrs()->height(),
+            'imgclass' => $this->attrs()->imgclass(),
+            'link' => $this->attrs()->link(),
+            'linkclass' => $this->attrs()->linkclass(),
+            'rel' => $this->attrs()->rel(),
+            'target' => $this->attrs()->target(),
+//            'text' => $this->attrs()->text(),
+            'title' => $this->attrs()->title(),
+            'width' => $this->attrs()->width(),
+            'sizes' => $this->attrs()->sizes(),
+            'lazy' => $this->attrs()->lazy(),
+            'prefix' => $this->attrs()->prefix(),
+            'autosizes' => $this->attrs()->autosizes(),
+            'quality' => $this->attrs()->quality(),
+            'figure' => $this->attrs()->figure(),
         ];
         return \kirbyTagMaker($attrs) . PHP_EOL . PHP_EOL;
     }

@@ -46,15 +46,9 @@ final class Srcset
             $options = $data;
         }
 
-        $defaults = [
-            'lazy' => option('bnomei.srcset.lazy'),
-            'prefix' => option('bnomei.srcset.prefix'),
-            'autosizes' => option('bnomei.srcset.autosizes'),
-            'figure' => option('bnomei.srcset.figure') === true,
-            'ratio' => option('bnomei.srcset.ratio'),
-            'quality' => intval(option('thumbs.quality', 80)),
-        ];
-        $this->options = $this->normalizeData(array_merge($defaults, $options));
+        $this->options = $this->normalizeData(
+            array_merge(self::defaultOptions(), $options)
+        );
 
         if ($this->parent && !A::get($this->options, 'file')) {
             $this->options['file'] = $this->parent->file((string)A::get($this->options, 'value'));
@@ -111,6 +105,9 @@ final class Srcset
             if (is_string($val) && $val === 'null') {
                 $val = null;
             }
+            if (is_string($val) && trim($val) === '') {
+                $val = null;
+            }
             if (is_null($val)) {
                 continue;
             }
@@ -131,8 +128,26 @@ final class Srcset
             if ($attr === 'value') {
                 $data['file'] = $tag->file(strval($val));
             }
+            if ($attr === 'lazy' && is_null($val)) {
+                $val = $this->option('lazy');
+            }
+            if ($attr === 'prefix' && is_null($val)) {
+                $val = $this->option('prefix');
+            }
+            if ($attr === 'autosizes' && is_null($val)) {
+                $val = $this->option('autosizes');
+            }
+            if ($attr === 'figure' && is_null($val)) {
+                $val = $this->option('figure');
+            }
+            if ($attr === 'ratio' && is_null($val)) {
+                $val = $this->option('ratio');
+            }
             if (is_null($val)) {
                 continue;
+            }
+            if ($attr === 'height' || $attr === 'width'|| $attr === 'quality') {
+                $val = intval($val);
             }
             $data[$attr] = $val;
         }
@@ -203,7 +218,11 @@ final class Srcset
 
         $attrs = [];
         foreach ($srcset as $key => $value) {
-            $attrs[] = '' . $key . '="' . $value . '"';
+            if ($key === 'data-thumb-srcset') {
+                $attrs[] = '' . $key . '=\'' . $value . '\'';
+            } else {
+                $attrs[] = '' . $key . '="' . $value . '"';
+            }
         }
 
         $text = str_replace(
@@ -260,5 +279,21 @@ final class Srcset
     public function html(): string
     {
         return trim(strval($this->text));
+    }
+
+    /**
+     * @param array $options
+     */
+    public static function defaultOptions(): array
+    {
+        return [
+            'debug' => option('debug'),
+            'lazy' => option('bnomei.srcset.lazy'),
+            'prefix' => option('bnomei.srcset.prefix'),
+            'autosizes' => option('bnomei.srcset.autosizes'),
+            'figure' => option('bnomei.srcset.figure') === true,
+            'ratio' => option('bnomei.srcset.ratio'),
+            'quality' => intval(option('thumbs.quality', 80)),
+        ];
     }
 }
