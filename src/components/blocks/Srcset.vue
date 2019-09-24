@@ -55,7 +55,10 @@
       <k-form :fields="fields" v-model="attrs" @submit="saveSettings" />
     </k-dialog>
 
-    <k-files-dialog ref="fileDialog" @submit="insertFile($event)"></k-files-dialog>
+    <k-files-dialog
+      ref="fileDialog"
+      @submit="insertFile($event)"
+    ></k-files-dialog>
     <k-upload ref="fileUpload" @success="insertUpload"></k-upload>
   </div>
 </template>
@@ -75,7 +78,7 @@ export default {
       default() {
         return {};
       }
-    },
+    }
     // options: {
     //   type: Object,
     //   default() {
@@ -193,8 +196,8 @@ export default {
     fetchOptions(link) {
       this.$api.get(link).then(response => {
         this.$nextTick(() => {
-          this.options = response
-        })
+          this.options = response;
+        });
       });
     },
     caption(html) {

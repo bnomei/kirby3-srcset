@@ -6,7 +6,8 @@
   "scripts": {
     "preinstall": "mkdir -p ./node_modules && touch ./node_modules/.metadata_never_index",
     "dev": "parcel watch src/index.js --no-source-maps -d ./",
-    "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
+    "build": "parcel build src/index.js --no-source-maps -d ./",
+    "build-exp": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.0",
