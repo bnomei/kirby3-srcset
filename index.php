@@ -8,7 +8,7 @@ Kirby::plugin('bnomei/srcset', [
         'prefix' => 'data-',
         'autosizes' => 'auto',
         'figure' => true,
-        'ratio' => 'lazyload-ratio',
+        'ratio' => 'lazysrcset-ratio',
     ],
     'snippets' => [
         'editor/srcset' => __DIR__ . '/snippets/srcset.php',
@@ -37,5 +37,15 @@ Kirby::plugin('bnomei/srcset', [
     'translations' => [
         'de'    => require __DIR__ . '/i18n/de.php',
         'en'    => require __DIR__ . '/i18n/en.php',
+        'es'    => require __DIR__ . '/i18n/es.php',
+        'fr'    => require __DIR__ . '/i18n/fr.php',
+        'it'    => require __DIR__ . '/i18n/it.php',
+        'lt'    => require __DIR__ . '/i18n/lt.php',
+        'nl'    => require __DIR__ . '/i18n/nl.php',
+        'pt_BR' => require __DIR__ . '/i18n/pt_BR.php',
+        'pt_PT' => require __DIR__ . '/i18n/pt_PT.php',
+        'ru'    => require __DIR__ . '/i18n/ru.php',
+        'sv_SE' => require __DIR__ . '/i18n/sv_SE.php',
+        'tr'    => require __DIR__ . '/i18n/tr.php',
     ]
 ]);
