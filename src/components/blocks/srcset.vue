@@ -17,29 +17,28 @@
                 </div>
                 <figcaption>
                     <k-editable
-                            :content="attrs.caption"
-                            :breaks="true"
-                            :placeholder="$t('editor.blocks.image.caption.placeholder') + '…'"
-                            @input="caption"
+                        :content="attrs.caption"
+                        :breaks="true"
+                        :placeholder="$t('editor.blocks.srcset.caption.placeholder') + '…'"
+                        @input="caption"
                     />
                 </figcaption>
             </template>
             <template v-else>
                 <div class="k-editor-image-block-placeholder" ref="element" tabindex="0">
-                    <k-button icon="upload" @click="uploadFile">{{ $t('editor.blocks.image.upload') }}</k-button>
-                    {{ $t('editor.blocks.image.or') }}
-                    <k-button icon="image" @click="selectFile">{{ $t('editor.blocks.image.select') }}</k-button>
+                    <k-button icon="upload" @click="uploadFile">{{ $t('editor.blocks.srcset.upload') }}</k-button>
+                    {{ $t('editor.blocks.srcset.or') }}
+                    <k-button icon="image" @click="selectFile">{{ $t('editor.blocks.srcset.select') }}</k-button>
                 </div>
             </template>
         </figure>
-
-        <k-files-dialog ref="fileDialog" @submit="insertFile($event)" />
-        <k-upload ref="fileUpload" @success="insertUpload" />
 
         <k-dialog ref="settings" @submit="saveSettings" size="medium">
             <k-form :fields="fields" v-model="attrs" @submit="saveSettings" />
         </k-dialog>
 
+        <k-files-dialog ref="fileDialog" @submit="insertFile($event)" />
+        <k-upload ref="fileUpload" @success="insertUpload" />
     </div>
 </template>
 
@@ -64,21 +63,28 @@
             fields() {
                 return {
                     alt: {
-                        label: this.$t('editor.blocks.image.alt.label'),
+                        label: this.$t('editor.blocks.srcset.alt.label'),
                         type: "text",
                         icon: "text"
                     },
                     link: {
-                        label: this.$t('editor.blocks.image.link.label'),
+                        label: this.$t('editor.blocks.srcset.link.label'),
                         type: "text",
                         icon: "url",
-                        placeholder: this.$t('editor.blocks.image.link.placeholder')
+                        placeholder: this.$t('editor.blocks.srcset.link.placeholder')
                     },
                     css: {
-                        label: this.$t('editor.blocks.image.css.label'),
+                        label: this.$t('editor.blocks.srcset.css.label'),
                         type: "text",
                         icon: "code",
+                    },
+                    height: {
+                        label: this.$t('editor.blocks.srcset.height.label'),
+                        type: "number",
+                        after: 'px',
+                        icon: "smile"
                     }
+                    // ADD SETTINGS/FIELDS HERE!
                 };
             }
         },
@@ -126,23 +132,23 @@
                     return [
                         {
                             icon: "open",
-                            label: this.$t("editor.blocks.image.open.browser"),
-                            click: this.open
+                            label: this.$t("editor.blocks.srcset.open.browser"),
+                            clicks: this.open
                         },
                         {
                             icon: "edit",
-                            label: this.$t("editor.blocks.image.open.panel"),
+                            label: this.$t("editor.blocks.srcset.open.panel"),
                             click: this.edit,
                             disabled: !this.attrs.guid
                         },
                         {
                             icon: "cog",
-                            label: this.$t("editor.blocks.image.settings"),
+                            label: this.$t("editor.blocks.srcset.settings"),
                             click: this.$refs.settings.open
                         },
                         {
                             icon: "image",
-                            label: this.$t("editor.blocks.image.replace"),
+                            label: this.$t("editor.blocks.srcset.replace"),
                             click: this.replace
                         },
                     ];
@@ -151,6 +157,8 @@
                 }
             },
             open() {
+                console.log('open');
+                debugger
                 window.open(this.attrs.src);
             },
             onLoad() {
