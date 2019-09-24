@@ -150,7 +150,7 @@ final class SrcsetTest extends TestCase
         ]);
 
         $this->assertStringStartsWith(
-            '<style>.my-ratio-class[data-ratio="50"]{padding-bottom:100%;}</style><figure data-ratio="50" class="c-figure my-ratio-class">',
+            '<style>.my-ratio-class[data-ratio="50"]{padding-bottom:50%;}</style><figure data-ratio="50" class="c-figure my-ratio-class">',
             $srcset->html()
         );
     }
