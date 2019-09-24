@@ -94,6 +94,7 @@ final class SrcsetTest extends TestCase
         $srcset = new Srcset([
             'value' => 'test2000.png',
             'parent' => page('home'),
+            'sizes' => 'default',
             'imgclass' => 'c-image',
             'lazy' => 'lazyload',
             'prefix' => 'data-',
@@ -149,7 +150,7 @@ final class SrcsetTest extends TestCase
         ]);
 
         $this->assertStringStartsWith(
-            '<style>.my-ratio-class[data-ratio="100"]{padding-bottom:100%;}</style><figure data-ratio="100" class="c-figure my-ratio-class">',
+            '<style>.my-ratio-class[data-ratio="50"]{padding-bottom:100%;}</style><figure data-ratio="50" class="c-figure my-ratio-class">',
             $srcset->html()
         );
     }

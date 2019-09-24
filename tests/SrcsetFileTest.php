@@ -90,7 +90,7 @@ final class SrcsetFileTest extends TestCase
     {
         $srcfile = new SrcsetFile($this->file, [320, 1200]);
         $this->assertEquals(
-            strval(round($srcfile->image()->dimensions()->ratio()*100, 2)),
+            strval(round(100.0 / $srcfile->image()->dimensions()->ratio(), 2)),
             $srcfile->ratio()
         );
     }
