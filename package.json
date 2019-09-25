@@ -21,5 +21,8 @@
   "dependencies": {
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.3"
+  },
+  "posthtml": {
+    "recognizeSelfClosing": true
   }
 }
