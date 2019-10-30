@@ -6,12 +6,13 @@ use Throwable;
 
 if (!class_exists('Kirby\Editor\Block')) {
     load([
-        'kirby\editor\block' => __DIR__ . '/../../../tests/site/plugins/editor/lib/Block.php',
-        'kirby\editor\blocks' => __DIR__ . '/../../../tests/site/plugins/editor/lib/Blocks.php',
+        'kirby\\editor\\block' => __DIR__ . '/Block.php',
     ]);
 }
-if (!class_exists('Kirby\Editor\Block')) {
-    class Block { }
+if (!class_exists('Kirby\Editor\Blocks')) {
+    load([
+        'kirby\\editor\\blocks' => __DIR__ . '/Blocks.php',
+    ]);
 }
 
 // TODO: no coverage since no real tests
