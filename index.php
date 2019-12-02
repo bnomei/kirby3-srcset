@@ -24,6 +24,16 @@ Kirby::plugin('bnomei/srcset', [
             $lazySrcset = new \Bnomei\Srcset($this, $options);
             return $lazySrcset->html();
         },
+        'lazySrcset' => function ($options = null) {
+            if ($this === null) {
+                return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null']);
+            }
+            if (is_string($options)) {
+                $options = ['srcset' => $options];
+            }
+            $lazySrcset = new \Bnomei\Srcset($this, $options);
+            return $lazySrcset->html();
+        },
     ],
     'tags' => [
         'lazysrcset' => [
