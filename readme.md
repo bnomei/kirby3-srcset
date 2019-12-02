@@ -93,19 +93,19 @@ This plugin is free but if you use it in a commercial project please consider to
 ## Usage PHP
 
 ```php
-echo $page->image('ukulele.jpg')->lazySrcset();
+echo $page->image('ukulele.jpg')->lazysrcset();
 
 // 320 and 1200
-echo $page->image('ukulele.jpg')->lazySrcset('default');
+echo $page->image('ukulele.jpg')->lazysrcset('default');
  
 // 576, 768, 992, 1200
-echo $page->image('ukulele.jpg')->lazySrcset('breakpoints');
+echo $page->image('ukulele.jpg')->lazysrcset('breakpoints');
  
 // 320, 640, 960
-echo $page->image('ukulele.jpg')->lazySrcset(['sizes' => [320, 640, 960]]);
+echo $page->image('ukulele.jpg')->lazysrcset(['sizes' => [320, 640, 960]]);
 
 // other options
-echo $page->image('ukulele.jpg')->lazySrcset([
+echo $page->image('ukulele.jpg')->lazysrcset([
     // lazysrcset
     'sizes' => [320, 640, 960],
     'lazy' => 'lazyloading-with-flickity',
