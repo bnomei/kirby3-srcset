@@ -91,6 +91,7 @@ This plugin is free but if you use it in a commercial project please consider to
 ![srcset editor block](https://raw.githubusercontent.com/bnomei/kirby3-srcset/master/kirby3-srcset-editor-block.png)
 
 **Specifically allow plugin block**
+
  When you [specifically define](https://github.com/getkirby/editor/wiki/Blueprint-setup#allowed) which blocks are allowed in an editor field you need to add [the plugin block](https://github.com/bnomei/kirby3-srcset/blob/b700916bd5223629e9a022f6817c8fc1530415cc/src/index.js#L3) like this:
  
  ```yaml
