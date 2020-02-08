@@ -220,6 +220,14 @@ Each figure element will be prefixed with a style element defining the ratio. Fo
 <style>.lazysrcset-ratio[data-ratio="56.25"]{padding-bottom:56.25%;}</style><figure><div data-ratio="56.25" class="lazysrcset-ratio"><!--- image tag with srcset --></div><figcaption>with caption</figcaption></figure>
 ```
 
+**with nonce**
+
+You can set a custom nonce using the options or install the [security headers plugin](https://github.com/bnomei/kirby3-security-headers). 
+```html
+<style nonce="A-NONCE-HERE">...
+```
+
+
 ## Settings
 
 | bnomei.srcset.            | Default        | Description               |            
@@ -229,6 +237,7 @@ Each figure element will be prefixed with a style element defining the ratio. Fo
 | autosizes | `auto` | bool or string. related to `data-sizes` attribute |
 | figure | `true` | bool. wrap image in figure or not |
 | ratio | `lazysrcset-ratio` | bool or string. adds data-ratio to parent of `img` |
+| nonce | `null` | null, string or callback. default nonce for style element |
 
  
 ## FAQ

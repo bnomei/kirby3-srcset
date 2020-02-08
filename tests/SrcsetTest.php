@@ -39,6 +39,39 @@ final class SrcsetTest extends TestCase
         $this->assertEquals('test2000.png', $srcset->option('value'));
     }
 
+    public function testNonce()
+    {
+        // csp plugin or callback could provide this
+        $srcset = new Srcset([
+            'value' => 'test2000.png',
+            'parent' => page('home'),
+            'nonce' => '',
+        ]);
+        $this->assertRegExp(
+            '/^<style>/',
+            $srcset->html()
+        );
+        $srcset = new Srcset([
+            'value' => 'test2000.png',
+            'parent' => page('home'),
+            'nonce' => null,
+        ]);
+        $this->assertRegExp(
+            '/^<style>/',
+            $srcset->html()
+        );
+        $srcset = new Srcset([
+            'value' => 'test2000.png',
+            'parent' => page('home'),
+            'nonce' => '@NONCE@',
+        ]);
+        $this->assertRegExp(
+            '/^<style nonce="@NONCE@">/',
+            $srcset->html()
+        );
+
+    }
+
     public function testImageFromData()
     {
         $srcset = new Srcset([

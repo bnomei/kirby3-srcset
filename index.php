@@ -9,6 +9,13 @@ Kirby::plugin('bnomei/srcset', [
         'autosizes' => 'auto',
         'figure' => true,
         'ratio' => 'lazysrcset-ratio',
+        'nonce' => function() {
+            $nonce = site()->nonce();
+            if (is_a($nonce, \Kirby\Cms\Field::class)) {
+                $nonce = $nonce->isNotEmpty() ? $nonce->value() : null;
+            }
+            return $nonce;
+        },
     ],
     'snippets' => [
         'editor/srcset' => __DIR__ . '/snippets/srcset.php',

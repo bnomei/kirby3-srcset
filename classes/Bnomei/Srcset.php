@@ -254,7 +254,11 @@ final class Srcset
         );
         $ratio = $srcfile->ratio();
 
-        $text = '<style>.'.A::get($data, 'ratio').'[data-ratio="'.$ratio.'"]{padding-bottom:'.$ratio.'%;}</style>' . $text;
+        $nonceAttr = '';
+        if ($nonce = $this->option('nonce')) {
+            $nonceAttr = ' nonce="'.$nonce.'"';
+        }
+        $text = '<style'.$nonceAttr.'>.'.A::get($data, 'ratio').'[data-ratio="'.$ratio.'"]{padding-bottom:'.$ratio.'%;}</style>' . $text;
 
         if (A::get($data, 'caption')) {
             $text = str_replace(
@@ -286,6 +290,11 @@ final class Srcset
      */
     public static function defaultOptions(): array
     {
+        $nonce = option('bnomei.srcset.nonce');
+        if (is_callable($nonce)) {
+            $nonce = $nonce();
+        }
+
         return [
             'debug' => option('debug'),
             'lazy' => option('bnomei.srcset.lazy'),
@@ -294,6 +303,7 @@ final class Srcset
             'figure' => option('bnomei.srcset.figure') === true,
             'ratio' => option('bnomei.srcset.ratio'),
             'quality' => intval(option('thumbs.quality', 80)),
+            'nonce' => $nonce,
         ];
     }
 }
