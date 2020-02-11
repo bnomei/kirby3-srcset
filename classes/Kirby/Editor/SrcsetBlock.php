@@ -36,6 +36,14 @@ final class SrcsetBlock extends Block
             return null;
         }
     }
+    
+    public function ratio(): ?float
+    {
+        if ($image = $this->image()) {
+            return $image->ratio();
+        }
+        return null;
+    }
 
     public function isEmpty(): bool
     {
