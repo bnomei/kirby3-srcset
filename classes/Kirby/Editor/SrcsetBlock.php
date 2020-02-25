@@ -6,12 +6,12 @@ use Throwable;
 
 if (!class_exists('Kirby\Editor\Block')) {
     load([
-        'kirby\\editor\\block' => __DIR__ . '/Block.php',
+        'kirby\\editor\\block' => realpath(__DIR__ . '/../../../../') . '/editor/lib/Block.php',
     ]);
 }
 if (!class_exists('Kirby\Editor\Blocks')) {
     load([
-        'kirby\\editor\\blocks' => __DIR__ . '/Blocks.php',
+        'kirby\\editor\\blocks' => realpath(__DIR__ . '/../../../../') . '/editor/lib/Blocks.php',
     ]);
 }
 
@@ -36,7 +36,7 @@ final class SrcsetBlock extends Block
             return null;
         }
     }
-    
+
     public function ratio(): ?float
     {
         if ($image = $this->image()) {
