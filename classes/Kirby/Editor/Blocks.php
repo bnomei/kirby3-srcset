@@ -22,6 +22,19 @@ class Blocks extends Collection
     }
 
     /**
+     * Converts the blocks to HTML and then
+     * uses the Str::excerpt method to create
+     * a non-formatted, shortened excerpt from it
+     *
+     * @param mixed ...$args
+     * @return string
+     */
+    public function excerpt(...$args)
+    {
+        return Str::excerpt($this->html(), ...$args);
+    }
+
+    /**
      * Creates a new block collection from a
      * JSON string
      *
@@ -129,5 +142,21 @@ class Blocks extends Collection
     public function toMarkdown(): string
     {
         return $this->markdown();
+    }
+
+    /**
+     * Prepare the blocks to be stored
+     *
+     * @return array
+     */
+    public function toStorage(): array
+    {
+        $blocks = [];
+
+        foreach ($this->data as $block) {
+            $blocks[] = $block->toStorage();
+        }
+
+        return $blocks;
     }
 }
