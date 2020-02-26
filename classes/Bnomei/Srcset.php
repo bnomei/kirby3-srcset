@@ -291,7 +291,7 @@ final class Srcset
     public static function defaultOptions(): array
     {
         $nonce = option('bnomei.srcset.nonce');
-        if (is_callable($nonce)) {
+        if (!is_string($nonce) && is_callable($nonce)) {
             $nonce = $nonce();
         }
 
