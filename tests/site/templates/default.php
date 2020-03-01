@@ -27,6 +27,9 @@
     </head>
     <body class="<?= option('debug') ? 'debug':'' ?>">
         <article>
+            <?= $page->textplain()->kirbytext() ?>
+        </article>
+        <article>
             <?= $page->text()->blocks() ?>
         </article>
     </body>
