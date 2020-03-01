@@ -4,15 +4,23 @@ namespace Kirby\Editor;
 
 use Throwable;
 
-if (!class_exists('Kirby\Editor\Block')) {
-    load([
-        'kirby\\editor\\block' => realpath(__DIR__ . '/../../../../') . '/editor/lib/Block.php',
-    ]);
+$foundEditor = false;
+foreach([realpath(__DIR__ . '/../../../../'), realpath(__DIR__ . '/../../../tests/site/plugins/')] as $dir) {
+    if (is_dir( $dir . '/editor')) {
+        foreach(['Block', 'Blocks'] as $lib) {
+            if (! class_exists("Kirby\Editor\{$lib}")) {
+                load([
+                    "Kirby\\Editor\\{$lib}" => $dir . "/editor/lib/{$lib}.php",
+                ]);
+            }
+            $foundEditor = true;
+            break;
+        }
+    }
 }
-if (!class_exists('Kirby\Editor\Blocks')) {
-    load([
-        'kirby\\editor\\blocks' => realpath(__DIR__ . '/../../../../') . '/editor/lib/Blocks.php',
-    ]);
+
+if (! $foundEditor) {
+    class Block {}
 }
 
 // TODO: no coverage since no real tests
