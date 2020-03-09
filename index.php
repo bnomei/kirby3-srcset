@@ -49,13 +49,41 @@ Kirby::plugin('bnomei/srcset', [
                 \Bnomei\Srcset::kirbytagAttrs()
             ),
             'html' => function ($tag) {
-                if ($tag === null) {
+                if ($tag === null || $tag->parent()->file($tag->value) === null) {
                     return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null']);
                 }
                 $srcsetTag = new \Bnomei\Srcset($tag);
                 return $srcsetTag->html();
             },
         ],
+    ],
+    'components' => [
+        'markdown' => function (Kirby $kirby, string $text = null, array $options = [], bool $inline = false) {
+            static $markdown;
+            static $config;
+
+            // if the config options have changed or the component is called for the first time,
+            // (re-)initialize the parser object
+            if ($config !== $options) {
+                $markdown = new \Kirby\Text\Markdown($options);
+                $config   = $options;
+            }
+
+            $srcsetPluginWithRatio = \Kirby\Toolkit\Str::startsWith($text, '<style>.lazysrcset-ratio[data-ratio');
+            if ($srcsetPluginWithRatio) {
+                $text = '<srcsetplugin>' . $text . '</srcsetplugin>';
+            }
+
+            $text = $markdown->parse($text, $inline);
+
+            if ($srcsetPluginWithRatio) {
+                $text = preg_replace_callback('/<\/?srcsetplugin>/', function () {
+                    return '';
+                }, $text);
+            }
+
+            return $text;
+        }
     ],
     'api' => [
         'routes' => [

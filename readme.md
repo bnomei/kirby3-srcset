@@ -17,6 +17,7 @@ This plugin extends the core `(image: )`-Kirbytag. All params that work for `(im
 - `data-sizes="auto"` attribute
 - `data-thumb-srcset` attribute printing the srcset array as json (only when debugging)
 - `data-ratio` attribute with ratio of the image to parent of `img` element
+- It registers a custom markdown component since needs to wrap and unwrap the markdown. 
 
 ## TOC
 
