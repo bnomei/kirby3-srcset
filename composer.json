@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-srcset",
   "type": "kirby-plugin",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "license": "MIT",
   "description": "Kirby 3 Plugin for creating lazyloading image srcset",
   "authors": [

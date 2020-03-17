@@ -49,7 +49,7 @@ Kirby::plugin('bnomei/srcset', [
                 \Bnomei\Srcset::kirbytagAttrs()
             ),
             'html' => function ($tag) {
-                if ($tag === null || $tag->parent()->file($tag->value) === null) {
+                if ($tag === null || \image($tag->value) === null) {
                     return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null']);
                 }
                 $srcsetTag = new \Bnomei\Srcset($tag);
