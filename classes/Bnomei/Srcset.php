@@ -56,6 +56,7 @@ final class Srcset
         $this->text = $this->imageKirbytagFromData($this->options);
         $this->text = $this->applySrcset($this->text, $this->options);
         $this->text = $this->applyRatio($this->text, $this->options);
+        $this->text = $this->applyWrapper($this->text, $this->options);
     }
 
     /**
@@ -239,6 +240,19 @@ final class Srcset
      * @param array $data
      * @return string
      */
+    public function applyWrapper(string $text, array $data = []): string
+    {
+        if ($this->option('markdown.extra')) {
+            return "\n\n<srcsetplugin>\n\n" . $text . "\n\n</srcsetplugin>\n\n";
+        }
+        return $text;
+    }
+
+    /**
+     * @param string $text
+     * @param array $data
+     * @return string
+     */
     public function applyRatio(string $text, array $data = []): string
     {
         if (!A::get($data, 'figure') || !A::get($data, 'ratio')) {
@@ -304,6 +318,7 @@ final class Srcset
             'ratio' => option('bnomei.srcset.ratio'),
             'quality' => intval(option('thumbs.quality', 80)),
             'nonce' => $nonce,
+            'markdown.extra' => option('markdown.extra', false),
         ];
     }
 }

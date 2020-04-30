@@ -69,15 +69,10 @@ Kirby::plugin('bnomei/srcset', [
                 $config   = $options;
             }
 
-            $srcsetPluginWithRatio = \Kirby\Toolkit\Str::startsWith($text, '<style>.lazysrcset-ratio[data-ratio');
-            if ($srcsetPluginWithRatio) {
-                $text = '<srcsetplugin>' . $text . '</srcsetplugin>';
-            }
-
             $text = $markdown->parse($text, $inline);
 
-            if ($srcsetPluginWithRatio) {
-                $text = preg_replace_callback('/<\/?srcsetplugin>/', function () {
+            if (strpos($text, "<srcsetplugin>") !== false) {
+                $text = preg_replace_callback("/\n\n<\/?srcsetplugin>\n\n/", function () {
                     return '';
                 }, $text);
             }

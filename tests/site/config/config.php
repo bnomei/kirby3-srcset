@@ -2,6 +2,9 @@
 
 return [
     'debug' => true,
+    'markdown' => [
+        'extra' => true,
+    ],
     'thumbs' => [
         'quality' => 42,
         'srcsets' => [

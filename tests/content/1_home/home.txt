@@ -3,3 +3,6 @@ Title: Home
 ----
 
 Textplain: (lazysrcset: flowers.jpg)
+
+**test**
+![extra test](flowers.jpg){#id .class}
