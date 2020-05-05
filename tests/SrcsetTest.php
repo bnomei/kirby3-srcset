@@ -57,7 +57,7 @@ final class SrcsetTest extends TestCase
             'nonce' => null,
         ]);
         $this->assertRegExp(
-            '/^<style>/',
+            '/^<srcsetplugin>\n\n<style>/',
             $srcset->html()
         );
         $srcset = new Srcset([
@@ -66,7 +66,7 @@ final class SrcsetTest extends TestCase
             'nonce' => '@NONCE@',
         ]);
         $this->assertRegExp(
-            '/^<style nonce="@NONCE@">/',
+            '/^<srcsetplugin>\n\n<style nonce="@NONCE@">/',
             $srcset->html()
         );
 
@@ -103,7 +103,7 @@ final class SrcsetTest extends TestCase
         ]);
 
         $this->assertNotRegExp(
-            '/^<figure.*<\/figure>$/',
+            '/^<srcsetplugin>\n\n<figure.*<\/figure>$/',
             $srcset->html()
         );
 
