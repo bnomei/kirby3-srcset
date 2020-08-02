@@ -48,7 +48,7 @@ final class SrcsetTest extends TestCase
             'nonce' => '',
         ]);
         $this->assertRegExp(
-            '/^<style>/',
+            '/^<srcsetplugin>'.PHP_EOL.PHP_EOL.'<style>/',
             $srcset->html()
         );
         $srcset = new Srcset([
@@ -183,7 +183,7 @@ final class SrcsetTest extends TestCase
         ]);
 
         $this->assertStringStartsWith(
-            '<style>.my-ratio-class[data-ratio="50"]{padding-bottom:50%;}</style><figure data-ratio="50" class="c-figure my-ratio-class">',
+            '<srcsetplugin>'.PHP_EOL.PHP_EOL.'<style>.my-ratio-class[data-ratio="50"]{padding-bottom:50%;}</style><figure data-ratio="50" class="c-figure my-ratio-class">',
             $srcset->html()
         );
     }
