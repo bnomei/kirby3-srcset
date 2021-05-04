@@ -266,7 +266,7 @@ final class Srcset
             A::get($data, 'heigth'),
             A::get($data, 'quality')
         );
-        $ratio = $srcfile->ratio();
+        $ratio = str_replace(',', '.', $srcfile->ratio());
 
         $nonceAttr = '';
         if ($nonce = $this->option('nonce')) {
