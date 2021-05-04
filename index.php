@@ -23,7 +23,7 @@ Kirby::plugin('bnomei/srcset', [
     'fileMethods' => [
         'lazysrcset' => function ($options = []) {
             if ($this === null) {
-                return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null']);
+                return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null in fileMethod']);
             }
             if (is_string($options)) {
                 $options = ['sizes' => $options];
@@ -33,7 +33,7 @@ Kirby::plugin('bnomei/srcset', [
         },
         'lazySrcset' => function ($options = []) {
             if ($this === null) {
-                return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null']);
+                return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null in fileMethod']);
             }
             if (is_string($options)) {
                 $options = ['sizes' => $options];
@@ -50,7 +50,7 @@ Kirby::plugin('bnomei/srcset', [
             ),
             'html' => function ($tag) {
                 if ($tag === null || \image($tag->value) === null) {
-                    return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null']);
+                    return \Kirby\Cms\Html::img('', ['alt' => 'lazysrcset can not create srcset from null in Kirbytag [' . print_r($tag, true) . ']']);
                 }
                 $srcsetTag = new \Bnomei\Srcset($tag);
                 return $srcsetTag->html();

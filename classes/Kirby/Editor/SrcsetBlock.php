@@ -39,7 +39,8 @@ final class SrcsetBlock extends Block
     public function image()
     {
         try {
-            return $this->kirby()->api()->parent($this->attrs()->guid()->value());
+            return \image($this->attrs()->id()->value());
+            //return $this->kirby()->api()->parent($this->attrs()->guid()->value());
         } catch (Throwable $e) {
             return null;
         }
@@ -92,6 +93,7 @@ final class SrcsetBlock extends Block
         if ($image = $this->image()) {
             $data['attrs'] = array_merge($data['attrs'] ?? [], [
                 'guid' => $image->panelUrl(true),
+                'id' => $image->id(),
                 'ratio' => $image->ratio(),
                 'src' => $image->url(),
             ]);
