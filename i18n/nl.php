@@ -1,6 +1,6 @@
 <?php
 
-return array_merge(include (__DIR__ . '/base.php'), [
+return array_merge(include(__DIR__ . '/base.php'), [
     'editor.blocks.srcset.alt.label'           => 'Alternatieve tekst',
     'editor.blocks.srcset.caption.placeholder' => 'Voeg een onderschrift toe',
     'editor.blocks.srcset.css.label'           => 'CSS class',

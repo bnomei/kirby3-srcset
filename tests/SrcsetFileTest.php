@@ -29,7 +29,8 @@ final class SrcsetFileTest extends TestCase
         $this->assertInstanceOf(SrcsetFile::class, $srcfile);
     }
 
-    public function testSizes() {
+    public function testSizes()
+    {
         $srcfile = new SrcsetFile($this->file);
         $this->assertEquals('', $srcfile->sizes());
 
@@ -49,7 +50,9 @@ final class SrcsetFileTest extends TestCase
         $srcfile = new SrcsetFile($this->file, 'default');
         $this->assertEquals('default', $srcfile->sizes());
 
-        $srcfile = new SrcsetFile($this->file, function() { return 'default'; });
+        $srcfile = new SrcsetFile($this->file, function () {
+            return 'default';
+        });
         $this->assertEquals('default', $srcfile->sizes());
 
         $srcfile = new SrcsetFile($this->file, [320, 1200]);
@@ -65,25 +68,25 @@ final class SrcsetFileTest extends TestCase
     public function testSrc()
     {
         $srcfile = new SrcsetFile($this->file);
-        $this->assertRegExp('/^\/media\/pages\/home\/.*\/test2000.png$/', $srcfile->src());
+        $this->assertMatchesRegularExpression('/^\/media\/pages\/home\/.*\/test2000.png$/', $srcfile->src());
 
         $srcfile = new SrcsetFile($this->file, null, 500);
-        $this->assertRegExp('/^\/media\/pages\/home\/.*\/test2000-500x.png$/', $srcfile->src());
+        $this->assertMatchesRegularExpression('/^\/media\/pages\/home\/.*\/test2000-500x.png$/', $srcfile->src());
 
         $srcfile = new SrcsetFile($this->file, null, 500, 100);
-        $this->assertRegExp('/^\/media\/pages\/home\/.*\/test2000-500x100.png$/', $srcfile->src());
+        $this->assertMatchesRegularExpression('/^\/media\/pages\/home\/.*\/test2000-500x100.png$/', $srcfile->src());
 
         $srcfile = new SrcsetFile($this->file, null, 500, 100, 20);
-        $this->assertRegExp('/^\/media\/pages\/home\/.*\/test2000-500x100-q20.png$/', $srcfile->src());
+        $this->assertMatchesRegularExpression('/^\/media\/pages\/home\/.*\/test2000-500x100-q20.png$/', $srcfile->src());
     }
 
     public function testSrcset()
     {
         $srcfile = new SrcsetFile($this->file, [320, 1200]);
-        $this->assertRegExp('/^.*\/(test2000-320x.png 320w, ).*(test2000-1200x.png 1200w)$/', $srcfile->srcset());
+        $this->assertMatchesRegularExpression('/^.*\/(test2000-320x.png 320w, ).*(test2000-1200x.png 1200w)$/', $srcfile->srcset());
 
         $srcfile = new SrcsetFile($this->file, 'breakpoints');
-        $this->assertRegExp('/^.*(576w).*(768w).*(992w).*(1200w)$/', $srcfile->srcset());
+        $this->assertMatchesRegularExpression('/^.*(576w).*(768w).*(992w).*(1200w)$/', $srcfile->srcset());
     }
 
     public function testRatio()

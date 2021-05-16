@@ -1,5 +1,5 @@
 <?php
-return array_merge(include (__DIR__ . '/base.php'), [
+return array_merge(include(__DIR__ . '/base.php'), [
     'editor.blocks.srcset.alt.label'           => 'Alt текст',
     'editor.blocks.srcset.caption.placeholder' => 'Добавить подпись',
     'editor.blocks.srcset.css.label'           => 'CSS класс',

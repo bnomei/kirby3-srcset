@@ -47,7 +47,7 @@ final class SrcsetTest extends TestCase
             'parent' => page('home'),
             'nonce' => '',
         ]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^<srcsetplugin>'.PHP_EOL.PHP_EOL.'<style>/',
             $srcset->html()
         );
@@ -56,7 +56,7 @@ final class SrcsetTest extends TestCase
             'parent' => page('home'),
             'nonce' => null,
         ]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^<srcsetplugin>\n\n<style>/',
             $srcset->html()
         );
@@ -65,11 +65,10 @@ final class SrcsetTest extends TestCase
             'parent' => page('home'),
             'nonce' => '@NONCE@',
         ]);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^<srcsetplugin>\n\n<style nonce="@NONCE@">/',
             $srcset->html()
         );
-
     }
 
     public function testImageFromData()
@@ -79,7 +78,7 @@ final class SrcsetTest extends TestCase
             'parent' => page('home'),
         ]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/(test2000-q42\.png).*(test2000-320x\.png 320w).*(test2000-1200x.png 1200w)/',
             $srcset->html()
         );
@@ -91,7 +90,7 @@ final class SrcsetTest extends TestCase
             'debug' => true,
         ]);
 
-        $this->assertNotRegExp(
+        $this->assertDoesNotMatchRegularExpression(
             '/data-src/',
             $srcset->html()
         );
@@ -102,7 +101,7 @@ final class SrcsetTest extends TestCase
             'figure' => false,
         ]);
 
-        $this->assertNotRegExp(
+        $this->assertDoesNotMatchRegularExpression(
             '/^<srcsetplugin>\n\n<figure.*<\/figure>$/',
             $srcset->html()
         );
@@ -116,7 +115,7 @@ final class SrcsetTest extends TestCase
             'autosizes' => true,
         ]);
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/(class="c-image lazyload").*(data-flickity-lazyload-src).*(test2000-q42\.png).*(data-flickity-lazyload-srcset).*(test2000-320x\.png 320w).*(test2000-1200x.png 1200w).*(data-sizes="auto")/',
             $srcset->html()
         );

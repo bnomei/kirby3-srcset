@@ -182,7 +182,7 @@ final class Srcset
         $text = kirby()->kirbytags($text, $data);
         if (!A::get($data, 'figure')) {
             // <figure> </figure> and <figure class="" ...> </figure>
-            $text = preg_replace('/<(\/?)(figure[^>]*)>/',  '', $text);
+            $text = preg_replace('/<(\/?)(figure[^>]*)>/', '', $text);
         }
         return $text;
     }

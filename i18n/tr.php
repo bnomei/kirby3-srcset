@@ -1,6 +1,6 @@
 <?php
 
-return array_merge(include (__DIR__ . '/base.php'), [
+return array_merge(include(__DIR__ . '/base.php'), [
     'editor.blocks.srcset.alt.label'           => 'Alternatif metin',
     'editor.blocks.srcset.caption.placeholder' => 'Bir başlık ekle',
     'editor.blocks.srcset.css.label'           => 'CSS sınıfı',

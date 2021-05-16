@@ -1,6 +1,6 @@
 <?php
 
-return array_merge(include (__DIR__ . '/base.php'), [
+return array_merge(include(__DIR__ . '/base.php'), [
     'editor.blocks.srcset.alt.label'           => 'Alt tekstas',
     'editor.blocks.srcset.caption.placeholder' => 'Pridėti aprašymą',
     'editor.blocks.srcset.css.label'           => 'CSS klasė',

@@ -1,6 +1,6 @@
 <?php
 
-return array_merge(include (__DIR__ . '/base.php'), [
+return array_merge(include(__DIR__ . '/base.php'), [
     'editor.blocks.srcset.alt.label'           => 'Testo alternativo',
     'editor.blocks.srcset.caption.placeholder' => 'Aggiungi una didascalia',
     'editor.blocks.srcset.css.label'           => 'Classi CSS',
