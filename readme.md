@@ -21,7 +21,7 @@ This plugin extends the core `(image: )`-Kirbytag. All params that work for `(im
 
 ## TOC
 
-1. [Commerical Usage](https://github.com/bnomei/kirby3-srcset#commecial-usage)
+1. [Commercial Usage](https://github.com/bnomei/kirby3-srcset#commecial-usage)
 1. [Installation](https://github.com/bnomei/kirby3-srcset#installation)
 1. [Usage Kirbytag](https://github.com/bnomei/kirby3-srcset#usage-kirbytag)
 1. [Usage Editor Block](https://github.com/bnomei/kirby3-srcset#usage-editor-block)
@@ -31,7 +31,7 @@ This plugin extends the core `(image: )`-Kirbytag. All params that work for `(im
 1. [FAQ](https://github.com/bnomei/kirby3-srcset#faq)
 1. [Image Ratio](https://github.com/bnomei/kirby3-srcset#image-ratio)
 
-## Commerical Usage
+## Commercial Usage
 
 > <br>
 > <b>Support open source!</b><br><br>
