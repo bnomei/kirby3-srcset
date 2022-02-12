@@ -1,3 +1,7 @@
+> <br>
+> With Kirby 3.6 introducing support for WebP & AVIF images and the `lazy`-attribute being well supported by modern browsers this plugin has in my opinion become obsolete. Thus I will not continue to work on it.
+> <br><br>
+
 # Kirby 3 Srcset
 
 ![Release](https://flat.badgen.net/packagist/v/bnomei/kirby3-srcset?color=ae81ff)
